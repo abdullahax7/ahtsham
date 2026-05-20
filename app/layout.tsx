@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import { getAllSiteSettings } from '../lib/db/repos';
 
 
 
@@ -16,32 +17,44 @@ export const viewport: Viewport = {
   themeColor: '#0f1117',
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://qazi.host'),
-  title: "Pakistan's #1 DMCA Ignored Cheap Offshore Hosting",
+// Strip a full <meta ... content="X" .../> snippet down to just the content
+// value, so admins can paste either the bare token from Search Console or
+// the whole tag they copy out of the verification screen.
+function parseVerificationToken(raw: string): string {
+  const trimmed = raw.trim();
+  if (!trimmed) return '';
+  const match = trimmed.match(/content\s*=\s*["']([^"']+)["']/i);
+  return match ? match[1] : trimmed;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const all = await getAllSiteSettings().catch(() => ({} as Record<string, { value: string }>));
+  const verification = parseVerificationToken(all['google_site_verification']?.value ?? '');
+
+  return {
+    metadataBase: new URL('https://qazi.host'),
+    title: "Pakistan's #1 DMCA Ignored Cheap Offshore Hosting",
     description: 'Affordable DMCA ignored hosting, shared licenses, and SEO tools to supercharge your online presence. Instant setup and Mon-Fri WhatsApp support.',
-  keywords: ['web hosting', 'dmca ignored hosting', 'cheap cpanel license', 'litespeed license', 'qazihost'],
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: "Pakistan's #1 DMCA Ignored Cheap Offshore Hosting",
-    description: 'Affordable DMCA ignored hosting, shared licenses, and SEO tools.',
-    images: ['/logo.webp'],
-    type: 'website',
-    url: 'https://qazi.host',
-    siteName: 'Qazi.Host',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Pakistan's #1 DMCA Ignored Cheap Offshore Hosting",
+    keywords: ['web hosting', 'dmca ignored hosting', 'cheap cpanel license', 'litespeed license', 'qazihost'],
+    alternates: { canonical: '/' },
+    openGraph: {
+      title: "Pakistan's #1 DMCA Ignored Cheap Offshore Hosting",
+      description: 'Affordable DMCA ignored hosting, shared licenses, and SEO tools.',
+      images: ['/logo.webp'],
+      type: 'website',
+      url: 'https://qazi.host',
+      siteName: 'Qazi.Host',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: "Pakistan's #1 DMCA Ignored Cheap Offshore Hosting",
       description: 'Affordable DMCA ignored hosting, shared licenses, and SEO tools to supercharge your online presence. Instant setup and Mon-Fri WhatsApp support.',
-    images: ['/logo.webp'],
-  },
-  icons: {
-    icon: '/favicon.ico',
-  },
-};
+      images: ['/logo.webp'],
+    },
+    icons: { icon: '/favicon.ico' },
+    verification: verification ? { google: verification } : undefined,
+  };
+}
 
 import { ToastProvider } from './components/Toast';
 

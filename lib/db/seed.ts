@@ -201,6 +201,8 @@ const SITE_SETTINGS: { key: string; value: string; type?: string }[] = [
   { key: "final_cta_subtitle", value: "Join 5,000+ professionals who trust Qazi.Host for their infrastructure needs.", type: "textarea" },
   { key: "final_cta_primary_label", value: "Get Started" },
   { key: "final_cta_secondary_label", value: "Chat on WhatsApp" },
+  // SEO / Verification
+  { key: "google_site_verification", value: "" },
 ];
 
 export function runSeed() {

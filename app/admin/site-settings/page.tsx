@@ -118,6 +118,13 @@ const GROUPS: Group[] = [
       { key: 'footer_copyright_suffix', label: 'Copyright Suffix' },
     ],
   },
+  {
+    title: 'SEO / Verification',
+    description: 'Google Search Console verification. Paste either just the token (e.g. "abc123...") or the full <meta> tag Google gives you — the system will extract the token automatically. Renders on every page as <meta name="google-site-verification" content="…" /> in the document head.',
+    fields: [
+      { key: 'google_site_verification', label: 'Google Site Verification Token' },
+    ],
+  },
 ];
 
 export default async function SiteSettingsAdminPage() {
