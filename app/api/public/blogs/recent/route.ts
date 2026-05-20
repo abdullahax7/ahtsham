@@ -2,14 +2,12 @@ import { NextResponse } from "next/server";
 import { listBlogs } from "../../../../../lib/db/repos";
 
 export const runtime = "nodejs";
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const productSku = searchParams.get("product") ?? undefined;
   const limit = Number(searchParams.get("limit") ?? "3");
   const { rows } = await listBlogs({ productSku, sort: "newest", page: 1, perPage: limit });
-  return NextResponse.json(rows, {
-    headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
-  });
+  return NextResponse.json(rows);
 }
