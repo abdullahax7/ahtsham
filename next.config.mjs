@@ -5,13 +5,10 @@ const nextConfig = {
       { protocol: 'https', hostname: '**' },
     ],
   },
-  // Don't bundle better-sqlite3 — it's a native module that must remain external.
-  webpack: (config) => {
-    config.externals = config.externals || [];
-    if (Array.isArray(config.externals)) {
-      config.externals.push({ 'better-sqlite3': 'commonjs better-sqlite3' });
-    }
-    return config;
+  // Keep better-sqlite3 out of the bundler — it's a native node-addon and must
+  // be required at runtime on the server, never bundled into the client.
+  experimental: {
+    serverComponentsExternalPackages: ['better-sqlite3'],
   },
 };
 

@@ -52,6 +52,7 @@ const GROUPS: Group[] = [
 
 export default async function SiteSettingsAdminPage() {
   const map = await getAllSiteSettings();
+  // map is a plain Record<string, { value, type, updated_at }>.
 
   return (
     <div>
@@ -65,7 +66,7 @@ export default async function SiteSettingsAdminPage() {
             {g.description && <p style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 16, fontSize: '0.9rem' }}>{g.description}</p>}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {g.fields.map((f) => {
-                const val = map.get(f.key)?.value ?? '';
+                const val = map[f.key]?.value ?? '';
                 if (f.type === 'textarea') {
                   return (
                     <div key={f.key}>

@@ -209,20 +209,22 @@ export function updateSettings(values: Partial<{ status_html: string; dashboard_
 // =============================================================================
 // Site settings (key/value)
 // =============================================================================
+export type SiteSettingsRecord = Record<string, { value: string; type: string; updated_at: string }>;
+
 export const getAllSiteSettings = cache(
-  async () => {
+  async (): Promise<SiteSettingsRecord> => {
     const rows = await db.select().from(t.site_settings).all();
-    const map = new Map<string, t.SiteSetting>();
-    for (const r of rows) map.set(r.key, r);
-    return map;
+    const obj: SiteSettingsRecord = {};
+    for (const r of rows) obj[r.key] = { value: r.value, type: r.type, updated_at: r.updated_at };
+    return obj;
   },
   ["site_settings_map"],
   { tags: [TAGS.siteSettings] },
 );
 
 export async function getSiteSetting(key: string, fallback = ""): Promise<string> {
-  const map = await getAllSiteSettings();
-  return map.get(key)?.value ?? fallback;
+  const obj = await getAllSiteSettings();
+  return obj[key]?.value ?? fallback;
 }
 
 export function upsertSiteSetting(key: string, value: string, type: string = "text") {
