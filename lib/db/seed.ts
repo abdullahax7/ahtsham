@@ -230,5 +230,8 @@ export function runSeed() {
       PAYMENTS.forEach((p, i) => insertP.run(p.name, p.image_url ?? null, i));
     }
   });
-  tx();
+  // BEGIN IMMEDIATE so concurrent processes (e.g. parallel `next build`
+  // workers) queue on the SQLite busy_timeout instead of failing the
+  // deferred-to-write upgrade with SQLITE_BUSY.
+  tx.immediate();
 }

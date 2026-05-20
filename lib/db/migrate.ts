@@ -119,6 +119,12 @@ let migrated = false;
 
 export function runMigrations() {
   if (migrated) return;
-  sqlite.exec(MIGRATION_SQL);
+  // BEGIN IMMEDIATE so concurrent processes (e.g. parallel `next build`
+  // workers) queue on the SQLite busy_timeout instead of racing into
+  // SQLITE_BUSY mid-transaction.
+  const tx = sqlite.transaction(() => {
+    sqlite.exec(MIGRATION_SQL);
+  });
+  tx.immediate();
   migrated = true;
 }
