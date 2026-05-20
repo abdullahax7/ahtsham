@@ -1,0 +1,24 @@
+Global Meta Tag Editor: Control the SEO title/desc of every page from one view.
+Sitemap.xml Generator: Auto-rebuild sitemap when new blogs are added.
+Canonical Link Manager: Prevent duplicate content issues.
+Redirect Manager (301/302): Map old URLs to new ones without editing .htaccess.
+Structured Data (Schema) Builder: Inject JSON-LD for "Products" and "FAQ" automatically.
+OpenGraph Previewer: See how your site looks on Facebook/WhatsApp before publishing.
+Keyword Density Checker: Analysis Tool for blog content.
+Robots.txt Editor: Control search engine crawling from the UI.
+Google Analytics/GTM Integration: Input fields for tracking IDs.
+Pixel Tracking Manager: Inject Facebook/TikTok pixel code snippets.
+Internal Tooling & Optimization
+Asset Browser: A file manager for all images/PDFs uploaded to the site.
+Global Text Search-and-Replace: Change "24/7" to "Mon-Fri" across all textual content in the DB.
+Image Alt-Tag Batch Editor: Quickly add alt text to images that are missing it.
+Cache Purge Button: Clear the Next.js cache/CDN with one click.
+Database Health Check: Identify and remove orphaned blog categories or tags.
+Error Log Viewer: Real-time view of server-side errors (Next.js logs).
+Font Manager: Upload and swap system fonts for the frontend.
+Color Palette Picker: Change the --accent and --surface variables globally.
+Draft Preview Mode: A hidden link to view the site as it would look with current draft changes.
+System Info Panel: Display Node.js version, allocated memory, and disk usage.
+add sorting search and all type of filters paginations in the home page with working,
+also add details in the home page like confirming delete, view blog, sorint, search, paginations in the admin pages and also add what u like
+add animation in the website same like home page t should be mobile and pc optimized and best for performance and user impact 

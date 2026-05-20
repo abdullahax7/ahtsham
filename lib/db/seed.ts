@@ -1,0 +1,234 @@
+import "server-only";
+import { sqlite } from "./client";
+
+// Seeds initial data only when tables are empty. Safe to call on every boot.
+
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: { label: string; value: string }[];
+};
+
+type ProductSeed = {
+  slug: string;
+  name: string;
+  category: "hosting" | "dedicated" | "license" | "service";
+  short_description: string;
+  long_description?: string;
+  icon?: string;
+  starting_price_usd?: string;
+  starting_price_pkr?: string;
+  order_url?: string;
+  is_featured?: boolean;
+  sort_order?: number;
+  features?: string[];
+  plans?: Plan[];
+  page_content?: Record<string, unknown>;
+};
+
+const PRODUCTS: ProductSeed[] = [
+  {
+    slug: "shared-hosting",
+    name: "Shared Hosting",
+    category: "hosting",
+    short_description: "Affordable hosting for websites and blogs.",
+    starting_price_usd: "$1.99",
+    starting_price_pkr: "499 PKR",
+    icon: "Server",
+    is_featured: true,
+    sort_order: 0,
+    features: [
+      "Up to Unlimited Websites",
+      "NVMe SSD Storage",
+      "Free SSL Certificate",
+      "cPanel Control Panel",
+      "Mon-Fri WhatsApp Support",
+    ],
+    plans: [
+      { name: "Shared 0", price: "Rs. 499", setup: "Rs. 50 Setup Fee", popular: false, orderLink: "https://qazi.host/cart.php?a=add&pid=67", specs: [
+        { label: "Domains", value: "1" }, { label: "NVMe Storage", value: "1024 MB (1 GB)" }, { label: "Bandwidth", value: "5120 MB (5 GB)" }, { label: "FTPs", value: "Unlimited" }, { label: "SSL", value: "Free" }, { label: "Backups", value: "Free" }, { label: "Softaculous", value: "Free" }, { label: "Control Panel", value: "cPanel" }, { label: "DMCA Ignored", value: "Yes" }, { label: "Support", value: "Basic" },
+      ] },
+      { name: "Shared 1", price: "Rs. 999", setup: "Rs. 50 Setup Fee", popular: false, orderLink: "https://qazi.host/cart.php?a=add&pid=6", specs: [
+        { label: "Domains", value: "3" }, { label: "NVMe Storage", value: "5120 MB (5 GB)" }, { label: "Bandwidth", value: "15360 MB (15 GB)" }, { label: "FTPs", value: "Unlimited" }, { label: "SSL", value: "Free" }, { label: "Backups", value: "Free" }, { label: "Softaculous", value: "Free" }, { label: "Control Panel", value: "cPanel" }, { label: "DMCA Ignored", value: "Yes" }, { label: "Support", value: "Basic" },
+      ] },
+      { name: "Shared 2", price: "Rs. 1,799", setup: "Rs. 50 Setup Fee", popular: true, orderLink: "https://qazi.host/cart.php?a=add&pid=8", specs: [
+        { label: "Domains", value: "5" }, { label: "NVMe Storage", value: "10240 MB (10 GB)" }, { label: "Bandwidth", value: "20480 MB (20 GB)" }, { label: "FTPs", value: "Unlimited" }, { label: "SSL", value: "Free" }, { label: "Backups", value: "Free" }, { label: "Softaculous", value: "Free" }, { label: "Control Panel", value: "cPanel" }, { label: "DMCA Ignored", value: "Yes" }, { label: "Support", value: "Basic" },
+      ] },
+      { name: "Shared 3", price: "Rs. 2,999", setup: "Rs. 50 Setup Fee", popular: false, orderLink: "https://qazi.host/cart.php?a=add&pid=9", specs: [
+        { label: "Domains", value: "10" }, { label: "NVMe Storage", value: "10240 MB (10 GB)" }, { label: "Bandwidth", value: "Unlimited" }, { label: "FTPs", value: "Unlimited" }, { label: "SSL", value: "Free" }, { label: "Backups", value: "Free" }, { label: "Softaculous", value: "Free" }, { label: "Control Panel", value: "cPanel" }, { label: "DMCA Ignored", value: "Yes" }, { label: "Support", value: "Priority" },
+      ] },
+    ],
+    page_content: {
+      hero_title: "DMCA Ignored Shared Hosting",
+      hero_subtitle: "NVMe powered cPanel hosting with full DMCA protection and instant activation.",
+    },
+  },
+  {
+    slug: "reseller-hosting",
+    name: "Reseller Hosting",
+    category: "hosting",
+    short_description: "Start your own hosting business with WHM/cPanel and white-label branding.",
+    starting_price_usd: "$9.99",
+    starting_price_pkr: "999 PKR",
+    icon: "Users",
+    is_featured: true,
+    sort_order: 1,
+    features: ["Free WHMCS License", "WHM/cPanel Access", "White-Label Branding", "Unlimited Bandwidth", "Priority Support"],
+    plans: [],
+  },
+  {
+    slug: "vps",
+    name: "VPS Hosting",
+    category: "hosting",
+    short_description: "Virtual private servers with full root access.",
+    icon: "Cloud",
+    sort_order: 2,
+    plans: [],
+  },
+  {
+    slug: "dedicated-servers",
+    name: "Dedicated Servers",
+    category: "dedicated",
+    short_description: "100% DMCA Ignored Dedicated Servers.",
+    icon: "HardDrive",
+    is_featured: true,
+    sort_order: 3,
+    plans: [],
+  },
+  { slug: "cpanel-license", name: "cPanel License", category: "license", short_description: "Official cPanel/WHM license.", icon: "KeyRound", starting_price_usd: "$12", sort_order: 10, plans: [] },
+  { slug: "plesk-license", name: "Plesk License", category: "license", short_description: "Plesk Obsidian license.", icon: "KeyRound", starting_price_usd: "$10", sort_order: 11, plans: [] },
+  { slug: "litespeed-license", name: "LiteSpeed License", category: "license", short_description: "LiteSpeed Web Server license.", icon: "Zap", starting_price_usd: "$8", sort_order: 12, plans: [] },
+  { slug: "cloudlinux-license", name: "CloudLinux License", category: "license", short_description: "CloudLinux OS license.", icon: "Shield", starting_price_usd: "$12", sort_order: 13, plans: [] },
+  { slug: "virtualizor", name: "Virtualizor License", category: "license", short_description: "Virtualizor VPS control panel.", icon: "KeyRound", sort_order: 14, plans: [] },
+  { slug: "directadmin", name: "DirectAdmin License", category: "license", short_description: "DirectAdmin control panel license.", icon: "KeyRound", sort_order: 15, plans: [] },
+  { slug: "jetbackup", name: "JetBackup License", category: "license", short_description: "JetBackup backup solution.", icon: "KeyRound", sort_order: 16, plans: [] },
+  { slug: "softaculous", name: "Softaculous License", category: "license", short_description: "1-click installer for hundreds of apps.", icon: "KeyRound", sort_order: 17, plans: [] },
+  { slug: "sitepad", name: "SitePad License", category: "license", short_description: "Drag-and-drop site builder.", icon: "KeyRound", sort_order: 18, plans: [] },
+  { slug: "whmsonic", name: "WHMSonic License", category: "license", short_description: "SHOUTcast/Icecast streaming control panel.", icon: "KeyRound", sort_order: 19, plans: [] },
+  { slug: "whmreseller", name: "WHMReseller License", category: "license", short_description: "WHMReseller automation.", icon: "KeyRound", sort_order: 20, plans: [] },
+  { slug: "dareseller", name: "DAReseller License", category: "license", short_description: "DAReseller automation for DirectAdmin.", icon: "KeyRound", sort_order: 21, plans: [] },
+  { slug: "imunify360", name: "Imunify360 License", category: "license", short_description: "Imunify360 server security suite.", icon: "Shield", sort_order: 22, plans: [] },
+  { slug: "cpguard", name: "CPGuard License", category: "license", short_description: "Server security and malware scanning.", icon: "Shield", sort_order: 23, plans: [] },
+  { slug: "osm", name: "OSM License", category: "license", short_description: "Outgoing Spam Monitor.", icon: "Shield", sort_order: 24, plans: [] },
+];
+
+const TESTIMONIALS: { author: string; role: string; text: string; stars: number; avatar?: string }[] = [
+  { author: "Sohail Sardar", role: "Trainer / Senior Blogger", text: "As a professional blogger and trainer, I personally recommend QaziHost's services. Their support is just awesome. You will also love their services.", stars: 5, avatar: "https://i.imgur.com/2fq5q25.jpg" },
+  { author: "Muhammad Faheem", role: "Senior Blogger", text: "If you are stucked at some techincal point in blogging, just call the QaziHost support, they will rescue you like 1122. Highly Recommended!", stars: 5, avatar: "https://i.imgur.com/Ghs00O4.jpg" },
+  { author: "Rao Irfan", role: "Senior Blogger", text: "In 2022, when Copyright strikes were resulting as server suspension... Then I decided to try QaziHost DMCA Ignored service. performance is rocking up!", stars: 5, avatar: "https://i.imgur.com/GUORUhh.jpg" },
+  { author: "Fatima Ijaz", role: "Blogger", text: "Qazi.Host deserves a solid five-star rating for its exceptional web hosting services. They are life saver. Their service is always up. I just love em ❤", stars: 5 },
+  { author: "Muhammad Ali", role: "Blogger", text: "I recently switched to Qazi Host. The migration process was seamless. The team at Qazi Host took care of everything without any downtime.", stars: 5, avatar: "https://i.imgur.com/cPAJyOx.jpg" },
+  { author: "Rana Shumail", role: " R.I.P. 💔", text: "My experience has been fantastic, and I look forward to a long and successful partnership with Qazi Host for my website hosting needs.", stars: 5, avatar: "https://i.imgur.com/XXDlrRu.jpg" },
+  { author: "Muhammad Rizwan", role: "Pro Blogger", text: "I've been with Qazi Host for over a year now, and I'm extremely satisfied. The user-friendly control panel makes it easy to manage.", stars: 5, avatar: "https://i.imgur.com/ni1rMO4.png" },
+  { author: "Qistas Khan", role: "Pro Blogger", text: "Choosing Qazi Host was one of the best decisions for my online business. Their plans are feature-rich and competitively priced.", stars: 5, avatar: "https://i.imgur.com/ReiTgwj.jpg" },
+  { author: "Khawar Aman Khan", role: "Blogger / Designer", text: "I've tried several hosting providers, but Qazi.host stands out. Their customer support has been top-notch – responsive and knowledgeable.", stars: 5, avatar: "https://i.imgur.com/I1IXKDI.jpg" },
+  { author: "Muhammad Aqeel", role: "Senior Blogger", text: "Choosing QaziHost was one of the best decisions for my business. The technical support team is not only knowledgeable but also friendly.", stars: 5, avatar: "https://i.imgur.com/foRMgX1.jpeg" },
+  { author: "Webxoo Team", role: "Infrastructure Partners", text: "As the agency behind Webxoo, we choose QaziHost for all our high-traffic client projects. Their NVMe speed and Mon-Fri WhatsApp support are truly industrial-grade. Highly recommended for professionals.", stars: 5 },
+];
+
+const FAQS: { q: string; a: string }[] = [
+  { q: "How does the WhatsApp checkout work?", a: "When you click 'Order Now', we redirect you to a secure checkout page where you can review your order. Once confirmed, a pre-filled WhatsApp message opens with your order details." },
+  { q: "Do I need an account to place an order?", a: "No account is required on this website. You can place orders directly via WhatsApp and manage your services through our partner portal." },
+  { q: "What payment methods do you accept?", a: "We accept bank transfers (HBL, UBL, Meezan), EasyPaisa, JazzCash, Payoneer, and cryptocurrency (USDT)." },
+  { q: "How fast is the provisioning?", a: "Shared hosting and licenses are activated within 1 hour of payment confirmation. Dedicated servers are provisioned within 6-24 hours." },
+  { q: "Can I upgrade my plan later?", a: "Absolutely! You can upgrade at any time through your account dashboard or by messaging us on WhatsApp. We calculate pro-rated differences." },
+];
+
+const PAYMENTS: { name: string; image_url?: string }[] = [
+  { name: "EasyPaisa", image_url: "https://ezmdqfujhwjlnhnncyes.supabase.co/storage/v1/object/sign/logos/easypaisa.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNTBiOTNmYy05NTkxLTQ1NjMtYjAzYy1jOTRmMzYwZjBlY2IiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9lYXN5cGFpc2Eud2VicCIsImlhdCI6MTc3NDg4OTg3MiwiZXhwIjo0OTI4NDg5ODcyfQ.1-43hT3wm8hBFVu0NbFMHhb8vDybuTzbJxm9GU4EUmw" },
+  { name: "JazzCash", image_url: "https://ezmdqfujhwjlnhnncyes.supabase.co/storage/v1/object/sign/logos/jazzcash.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNTBiOTNmYy05NTkxLTQ1NjMtYjAzYy1jOTRmMzYwZjBlY2IiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9qYXp6Y2FzaC53ZWJwIiwiaWF0IjoxNzc0ODg5ODkxLCJleHAiOjQ5Mjg0ODk4OTF9.oAp6h_vKVln0W-YmTHQw-Ot8FdUuxCnPYASJ2DPIpH0" },
+  { name: "Bank Transfer" },
+  { name: "Crypto" },
+  { name: "SadaPay", image_url: "https://ezmdqfujhwjlnhnncyes.supabase.co/storage/v1/object/sign/logos/sadapay.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNTBiOTNmYy05NTkxLTQ1NjMtYjAzYy1jOTRmMzYwZjBlY2IiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9zYWRhcGF5LndlYnAiLCJpYXQiOjE3NzQ4ODk5MjUsImV4cCI6NDkyODQ4OTkyNX0.TkmjIIMiRVDnEsy__1X38YaFW2iu828iTI0FTSzKCN0" },
+  { name: "NayaPay", image_url: "https://ezmdqfujhwjlnhnncyes.supabase.co/storage/v1/object/sign/logos/nayapay.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNTBiOTNmYy05NTkxLTQ1NjMtYjAzYy1jOTRmMzYwZjBlY2IiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9uYXlhcGF5LndlYnAiLCJpYXQiOjE3NzQ4ODk5MDgsImV4cCI6NDkyODQ4OTkwOH0.EqvulFMQw0nqoXnTifbDEsS9TTt2txa0gLc-reQzIS8" },
+];
+
+const SITE_SETTINGS: { key: string; value: string; type?: string }[] = [
+  { key: "logo_url", value: "https://ezmdqfujhwjlnhnncyes.supabase.co/storage/v1/object/sign/logos/logo.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNTBiOTNmYy05NTkxLTQ1NjMtYjAzYy1jOTRmMzYwZjBlY2IiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9sb2dvLndlYnAiLCJpYXQiOjE3NzQ4ODk4MzcsImV4cCI6NDkyODQ4OTgzN30.4pZItOynf6zIbZSyooOBCpBjzJSrPznB522kz5Rb-n0", type: "image" },
+  { key: "site_name", value: "Qazi.Host" },
+  { key: "whatsapp_number", value: "923043126626" },
+  { key: "whatsapp_default_message", value: "Hi Qazi.Host, I'm interested in your services and have some questions." },
+  { key: "hero_title_pre", value: "Get Super Fast," },
+  { key: "hero_title_grad", value: "DMCA Ignored Hosting" },
+  { key: "hero_title_post", value: "at Cheap Prices" },
+  { key: "hero_subtitle", value: "Welcome to QaziHost. Jump into super-fast hosting without emptying your bank wallet! Our Cheap DMCA Ignored Hosting isn't just about speed and prices, it's like having friendly superheroes ready to help with anything, anytime. No website problem is too tricky for our team. Get ready for a smooth ride with hosting that's easy on your wallet and support that's always there for you!", type: "text" },
+  { key: "ceo_promise_title", value: "CEO's Promise" },
+  { key: "ceo_promise_label", value: "Commitment to Privacy" },
+  { key: "ceo_promise_text", value: "At QaziHost, your privacy means everything to us, your data is 100% safe here. We don't peek, sell, or share your sensitive info with anyone. Our team works on strict, minimal access, only what's absolutely necessary, nothing more. Your privacy stays locked deep in the CEO's mind, and it's never going anywhere. Thanks for trusting us and helping make QaziHost the #1 DMCA Ignored hosting company in Pakistan. You focus on growing your sites, we'll handle the privacy & security part.", type: "text" },
+  { key: "ceo_photo", value: "https://lh3.googleusercontent.com/p/AF1QipMD0XNvQEk75V9wTQ6hjeqpPIR9xLtr07dtDfo-=w243-h304-n-k-no-nu", type: "image" },
+  { key: "footer_about", value: "Your trusted partner for premium DMCA Ignored hosting and shared licenses. Powering thousands of websites with industrial-grade infrastructure.", type: "text" },
+  { key: "footer_copyright_suffix", value: "Pakistan's #1 DMCA Ignored Hosting." },
+  { key: "support_hours", value: "Mon-Fri: 12PM - 12AM PST" },
+];
+
+export function runSeed() {
+  const tx = sqlite.transaction(() => {
+    // settings (single-row)
+    const settingsCount = (sqlite.prepare("SELECT COUNT(*) AS c FROM settings").get() as any).c;
+    if (settingsCount === 0) {
+      sqlite.prepare("INSERT INTO settings (status_html, dashboard_note) VALUES (?, ?)").run("", "");
+    }
+
+    // homepage_stats (single-row)
+    const statsCount = (sqlite.prepare("SELECT COUNT(*) AS c FROM homepage_stats").get() as any).c;
+    if (statsCount === 0) {
+      sqlite.prepare("INSERT INTO homepage_stats (clients, uptime_x10, support, locations) VALUES (?,?,?,?)").run(5000, 999, 100, 6000);
+    }
+
+    // site_settings
+    const upsertSite = sqlite.prepare("INSERT OR IGNORE INTO site_settings (key, value, type) VALUES (?,?,?)");
+    for (const s of SITE_SETTINGS) upsertSite.run(s.key, s.value, s.type ?? "text");
+
+    // products
+    const productsCount = (sqlite.prepare("SELECT COUNT(*) AS c FROM products").get() as any).c;
+    if (productsCount === 0) {
+      const insertProduct = sqlite.prepare(
+        "INSERT INTO products (slug, name, category, short_description, long_description, icon, starting_price_usd, starting_price_pkr, order_url, is_featured, is_visible, sort_order, features, plans, page_content) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      );
+      for (const p of PRODUCTS) {
+        insertProduct.run(
+          p.slug,
+          p.name,
+          p.category,
+          p.short_description ?? "",
+          p.long_description ?? "",
+          p.icon ?? null,
+          p.starting_price_usd ?? null,
+          p.starting_price_pkr ?? null,
+          p.order_url ?? null,
+          p.is_featured ? 1 : 0,
+          1,
+          p.sort_order ?? 0,
+          JSON.stringify(p.features ?? []),
+          JSON.stringify(p.plans ?? []),
+          JSON.stringify(p.page_content ?? {}),
+        );
+      }
+    }
+
+    // testimonials
+    const testimonialsCount = (sqlite.prepare("SELECT COUNT(*) AS c FROM testimonials").get() as any).c;
+    if (testimonialsCount === 0) {
+      const insertT = sqlite.prepare("INSERT INTO testimonials (author, role, text, stars, avatar, sort_order) VALUES (?,?,?,?,?,?)");
+      TESTIMONIALS.forEach((t, i) => insertT.run(t.author, t.role, t.text, t.stars, t.avatar ?? null, i));
+    }
+
+    // faqs
+    const faqCount = (sqlite.prepare("SELECT COUNT(*) AS c FROM faqs").get() as any).c;
+    if (faqCount === 0) {
+      const insertF = sqlite.prepare("INSERT INTO faqs (question, answer, sort_order) VALUES (?,?,?)");
+      FAQS.forEach((f, i) => insertF.run(f.q, f.a, i));
+    }
+
+    // payment_methods
+    const payCount = (sqlite.prepare("SELECT COUNT(*) AS c FROM payment_methods").get() as any).c;
+    if (payCount === 0) {
+      const insertP = sqlite.prepare("INSERT INTO payment_methods (name, image_url, sort_order) VALUES (?,?,?)");
+      PAYMENTS.forEach((p, i) => insertP.run(p.name, p.image_url ?? null, i));
+    }
+  });
+  tx();
+}

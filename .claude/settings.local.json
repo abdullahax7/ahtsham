@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(node -e \"const z = require\\(''zod''\\); console.log\\(typeof z.object, typeof z.string, typeof z.enum, typeof z.coerce\\)\")",
+      "Bash(curl -sL -o \"C:\\\\Users\\\\abdul\\\\Documents\\\\aaaaaaaaaaaaaaaaaaaaaa\\\\public\\\\payments\\\\sadapay.png\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Sadapay_logo.svg/512px-Sadapay_logo.svg.png\")",
+      "Bash(curl -sL -o \"C:\\\\Users\\\\abdul\\\\Documents\\\\aaaaaaaaaaaaaaaaaaaaaa\\\\public\\\\payments\\\\nayapay.png\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/NayaPay_logo.svg/512px-NayaPay_logo.svg.png\")",
+      "Bash(xxd app/admin/hero-stats/page.tsx)",
+      "Bash(npx next:*)"
+    ]
+  }
+}

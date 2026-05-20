@@ -1,0 +1,39 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# next.js build
+.next
+out
+build
+dist
+
+# typescript / build traces
+*.tsbuildinfo
+next-env.d.ts
+
+# logs
+*.log
+build.log
+build_log.txt
+build_output.log
+build_output2.log
+tsc_error.txt
+
+# env / secrets
+.env
+.env.local
+.env.*.local
+
+# sqlite database (runtime data)
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+Thumbs.db
