@@ -1,19 +1,20 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProductSchema from '../components/ProductSchema';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import LoadingSkeleton from '../components/LoadingSkeleton';
-import { 
-  ShieldCheck, 
-  Zap, 
-  HardDrive, 
-  Lock, 
-  Package, 
-  LayoutDashboard, 
-  Globe, 
-  MessageSquare 
+import {
+  ShieldCheck,
+  Zap,
+  HardDrive,
+  Lock,
+  Package,
+  LayoutDashboard,
+  Globe,
+  MessageSquare
 } from 'lucide-react';
 
 const PremiumGuarantees = dynamic(() => import('../components/PremiumGuarantees'), {
@@ -28,7 +29,16 @@ import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 import SetupGuide from '../components/SetupGuide';
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: Array<{ label: string; value: string }>;
+};
+
+const FALLBACK_PLANS: Plan[] = [
   {
     name: 'WHMSonic',
     price: 'PKR 350.00',
@@ -45,26 +55,47 @@ const plans = [
   },
 ];
 
+const FALLBACK_HERO_TITLE = 'WHMSonic Shoutcast License';
+const FALLBACK_HERO_SUBTITLE = 'WHMSonic is a popular WHM/cPanel plugin that enables hosting providers to offer Shoutcast streaming and AutoDJ hosting services to their clients with ease.';
+
 export default function WhmsonicLicense() {
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/whmsonic')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   return (
     <main>
       <Header />
 
       {/* Schema.org for Pricing */}
-      <ProductSchema 
-        name="WHMSonic Shoutcast License" 
-        url="https://qazi.host/whmsonic" 
+      <ProductSchema
+        name="WHMSonic Shoutcast License"
+        url="https://qazi.host/whmsonic"
         currency="PKR"
-        plans={plans} 
+        plans={plans}
       />
-      
+
 
       <section className="page-hero blur-in visible">
         <HeroParticles glowColor="rgba(239, 68, 68, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">WHMSonic Shoutcast License</h1>
-            <p className="delay-2">WHMSonic is a popular WHM/cPanel plugin that enables hosting providers to offer Shoutcast streaming and AutoDJ hosting services to their clients with ease.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="whmsonic" glowColor="rgba(239, 68, 68, 0.4)" />

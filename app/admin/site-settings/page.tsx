@@ -4,7 +4,7 @@ import { saveSiteSettings } from '../actions-content';
 export const runtime = 'nodejs';
 export const revalidate = 0;
 
-type Group = { title: string; description?: string; fields: { key: string; label: string; type?: 'text' | 'textarea' | 'image' | 'url' }[] };
+type Group = { title: string; description?: string; fields: { key: string; label: string; type?: 'text' | 'textarea' | 'image' | 'url' | 'html' }[] };
 
 const GROUPS: Group[] = [
   {
@@ -22,6 +22,76 @@ const GROUPS: Group[] = [
       { key: 'hero_title_grad', label: 'Hero Title (Highlighted)' },
       { key: 'hero_title_post', label: 'Hero Title (Line 3)' },
       { key: 'hero_subtitle', label: 'Hero Subtitle', type: 'textarea' },
+    ],
+  },
+  {
+    title: 'Status bar',
+    description: 'Top status strip shown above the header.',
+    fields: [
+      { key: 'status_bar_text', label: 'Status Text' },
+      { key: 'status_bar_uptime', label: 'Uptime Text' },
+      { key: 'status_bar_servers', label: 'Servers Text' },
+    ],
+  },
+  {
+    title: 'Homepage search & hero CTA',
+    fields: [
+      { key: 'search_placeholder', label: 'Search Placeholder' },
+      { key: 'hero_cta_label', label: 'Hero CTA Button Label' },
+    ],
+  },
+  {
+    title: 'Homepage — Featured Section',
+    description: 'The "DMCA Ignored Hostings & Cheap Shared Licenses" block and its three product cards.',
+    fields: [
+      { key: 'featured_section_label', label: 'Section Label' },
+      { key: 'featured_section_title', label: 'Section Title' },
+      { key: 'featured_section_desc', label: 'Section Description', type: 'textarea' },
+      { key: 'shared_card_tag', label: 'Shared Hosting Card — Tag' },
+      { key: 'shared_card_title', label: 'Shared Hosting Card — Title' },
+      { key: 'shared_card_desc', label: 'Shared Hosting Card — Description', type: 'textarea' },
+      { key: 'reseller_card_tag', label: 'Reseller Hosting Card — Tag' },
+      { key: 'reseller_card_title', label: 'Reseller Hosting Card — Title' },
+      { key: 'reseller_card_desc', label: 'Reseller Hosting Card — Description', type: 'textarea' },
+      { key: 'licenses_card_tag', label: 'Licenses Card — Tag' },
+      { key: 'licenses_card_title', label: 'Licenses Card — Title' },
+      { key: 'licenses_card_desc', label: 'Licenses Card — Description', type: 'textarea' },
+    ],
+  },
+  {
+    title: 'Homepage — Dedicated / DMCA',
+    description: 'Dedicated servers ad banner and warning notices. HTML allowed in the two warning blocks.',
+    fields: [
+      { key: 'dedicated_section_label', label: 'Section Label' },
+      { key: 'dedicated_section_title', label: 'Section Title' },
+      { key: 'dedicated_section_desc', label: 'Section Description', type: 'textarea' },
+      { key: 'custom_packages_text', label: 'Custom Packages Notice (HTML)', type: 'html' },
+      { key: 'prohibited_text', label: 'Strictly Prohibited Notice (HTML)', type: 'html' },
+    ],
+  },
+  {
+    title: 'Homepage — Process',
+    fields: [
+      { key: 'process_section_label', label: 'Section Label' },
+      { key: 'process_section_title', label: 'Section Title' },
+      { key: 'process_section_desc', label: 'Section Description', type: 'textarea' },
+    ],
+  },
+  {
+    title: 'Homepage — Tech',
+    fields: [
+      { key: 'tech_section_label', label: 'Section Label' },
+      { key: 'tech_section_title', label: 'Section Title' },
+    ],
+  },
+  {
+    title: 'Homepage — Final CTA',
+    description: 'The bottom "Ready to Launch?" call-to-action band.',
+    fields: [
+      { key: 'final_cta_title', label: 'Title' },
+      { key: 'final_cta_subtitle', label: 'Subtitle', type: 'textarea' },
+      { key: 'final_cta_primary_label', label: 'Primary Button Label' },
+      { key: 'final_cta_secondary_label', label: 'Secondary Button Label' },
     ],
   },
   {
@@ -67,11 +137,16 @@ export default async function SiteSettingsAdminPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {g.fields.map((f) => {
                 const val = map[f.key]?.value ?? '';
-                if (f.type === 'textarea') {
+                if (f.type === 'textarea' || f.type === 'html') {
                   return (
                     <div key={f.key}>
                       <label style={{ display: 'block', color: '#fff', fontWeight: 600, marginBottom: 8 }}>{f.label}</label>
-                      <textarea className="admin-textarea" name={`s_${f.key}`} defaultValue={val} rows={4} />
+                      <textarea className="admin-textarea" name={`s_${f.key}`} defaultValue={val} rows={f.type === 'html' ? 6 : 4} />
+                      {f.type === 'html' && (
+                        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', marginTop: 4 }}>
+                          HTML is rendered as-is on the homepage. Edit carefully.
+                        </p>
+                      )}
                     </div>
                   );
                 }

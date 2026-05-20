@@ -1,19 +1,20 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProductSchema from '../components/ProductSchema';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import LoadingSkeleton from '../components/LoadingSkeleton';
-import { 
-  ShieldCheck, 
-  Zap, 
-  HardDrive, 
-  Lock, 
-  Package, 
-  LayoutDashboard, 
-  Globe, 
-  MessageSquare 
+import {
+  ShieldCheck,
+  Zap,
+  HardDrive,
+  Lock,
+  Package,
+  LayoutDashboard,
+  Globe,
+  MessageSquare
 } from 'lucide-react';
 
 const PremiumGuarantees = dynamic(() => import('../components/PremiumGuarantees'), {
@@ -28,7 +29,16 @@ import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 import SetupGuide from '../components/SetupGuide';
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: Array<{ label: string; value: string }>;
+};
+
+const FALLBACK_PLANS: Plan[] = [
   {
     name: 'SitePad',
     price: 'PKR 450.00',
@@ -45,26 +55,47 @@ const plans = [
   },
 ];
 
+const FALLBACK_HERO_TITLE = 'SitePad Website Builder License';
+const FALLBACK_HERO_SUBTITLE = 'SitePad is a drag-and-drop website builder that integrates with hosting panels, offering hundreds of professional themes and a simple interface for creating beautiful websites without coding.';
+
 export default function SitepadLicense() {
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/sitepad')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   return (
     <main>
       <Header />
 
       {/* Schema.org for Pricing */}
-      <ProductSchema 
-        name="SitePad Website Builder License" 
-        url="https://qazi.host/sitepad" 
+      <ProductSchema
+        name="SitePad Website Builder License"
+        url="https://qazi.host/sitepad"
         currency="PKR"
-        plans={plans} 
+        plans={plans}
       />
-      
+
 
       <section className="page-hero blur-in visible">
         <HeroParticles glowColor="rgba(244, 63, 94, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">SitePad Website Builder License</h1>
-            <p className="delay-2">SitePad is a drag-and-drop website builder that integrates with hosting panels, offering hundreds of professional themes and a simple interface for creating beautiful websites without coding.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="sitepad" glowColor="rgba(244, 63, 94, 0.4)" />

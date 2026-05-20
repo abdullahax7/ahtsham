@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingAd from '../components/FloatingAd';
@@ -17,7 +18,42 @@ const RelatedBlogs = dynamic(() => import('../components/RelatedBlogs'), {
 import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: { label: string; value: string }[];
+};
+
+// VPS currently has no published plans — keep an empty fallback so the page
+// shows the "Coming Soon" block until the admin populates plans in the DB.
+const FALLBACK_PLANS: Plan[] = [];
+const FALLBACK_HERO_TITLE = 'VPS';
+const FALLBACK_HERO_SUBTITLE = 'Powerful virtual private servers with dedicated resources, full root access, and enterprise-grade performance.';
+
 export default function VPS() {
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/vps')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   return (
     <main>
       <Header />
@@ -26,8 +62,8 @@ export default function VPS() {
         <HeroParticles glowColor="rgba(59, 130, 246, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">VPS</h1>
-            <p className="delay-2">Powerful virtual private servers with dedicated resources, full root access, and enterprise-grade performance.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="vps" glowColor="rgba(59, 130, 246, 0.4)" />
@@ -39,7 +75,79 @@ export default function VPS() {
       <section className="pricing-section">
         <div className="container">
 
-          {/* Coming Soon Block */}
+          {plans.length > 0 && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '64px' }}>
+              {plans.map((plan, i) => (
+                <div key={i} className="hover-card" style={{
+                  background: plan.popular ? 'linear-gradient(135deg, rgba(59,130,246,0.12), rgba(248,87,39,0.08))' : 'var(--surface)',
+                  border: plan.popular ? '2px solid rgba(59,130,246,0.5)' : '1px solid var(--border)',
+                  borderRadius: '20px',
+                  padding: '40px 32px',
+                  position: 'relative',
+                  boxShadow: plan.popular ? '0 8px 32px rgba(59,130,246,0.15)' : '0 4px 16px rgba(0,0,0,0.1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  textAlign: 'center'
+                }}>
+                  {plan.popular && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '-14px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      background: 'linear-gradient(90deg,#3b82f6,#60a5fa)',
+                      color: '#fff',
+                      padding: '4px 20px',
+                      borderRadius: '32px',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      whiteSpace: 'nowrap'
+                    }}>Most Popular</div>
+                  )}
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>{plan.name}</h3>
+                  <div style={{ marginBottom: plan.setup ? '4px' : '24px' }}>
+                    <span style={{ fontSize: '2rem', fontWeight: 800, color: plan.popular ? '#60a5fa' : '#fff' }}>{plan.price}</span>
+                    <span style={{ fontSize: '0.9rem', color: 'var(--muted)', marginLeft: '4px' }}>/month</span>
+                  </div>
+                  {plan.setup && <div style={{ fontSize: '0.8rem', color: '#f59e0b', marginBottom: '24px' }}>{plan.setup}</div>}
+                  <div style={{ flex: 1 }}>
+                    {plan.specs.map((spec, j) => (
+                      <div key={j} style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '10px 0',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
+                        gap: '8px'
+                      }}>
+                        <span style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{spec.label}</span>
+                        <span style={{
+                          fontSize: '0.85rem',
+                          fontWeight: 600,
+                          color: spec.value === 'Yes' ? '#22c55e' : spec.value === 'Free' ? '#60a5fa' : '#fff',
+                          textAlign: 'right'
+                        }}>{spec.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {plan.orderLink && (
+                    <a
+                      href={plan.orderLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary"
+                      style={{ width: '100%', textAlign: 'center', marginTop: '24px', display: 'block' }}
+                    >
+                      Order Now
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {plans.length === 0 && (
+          /* Coming Soon Block */
           <div className="hover-card" style={{ textAlign: 'center', padding: '80px 24px', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '16px', marginBottom: '64px', boxShadow: '0 8px 32px rgba(0,0,0,0.2)' }}>
             <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -61,6 +169,7 @@ export default function VPS() {
               Request Early Access
             </a>
           </div>
+          )}
 
           {/* Notes */}
           <div className="warnings-container" style={{ marginTop: '64px', marginBottom: '80px' }}>

@@ -1,19 +1,20 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProductSchema from '../components/ProductSchema';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import LoadingSkeleton from '../components/LoadingSkeleton';
-import { 
-  ShieldCheck, 
-  Zap, 
-  HardDrive, 
-  Lock, 
-  Package, 
-  LayoutDashboard, 
-  Globe, 
-  MessageSquare 
+import {
+  ShieldCheck,
+  Zap,
+  HardDrive,
+  Lock,
+  Package,
+  LayoutDashboard,
+  Globe,
+  MessageSquare
 } from 'lucide-react';
 
 const PremiumGuarantees = dynamic(() => import('../components/PremiumGuarantees'), {
@@ -28,7 +29,16 @@ import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 import SetupGuide from '../components/SetupGuide';
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: Array<{ label: string; value: string }>;
+};
+
+const FALLBACK_PLANS: Plan[] = [
   {
     name: 'Imunify360',
     price: 'PKR 550.00',
@@ -45,26 +55,47 @@ const plans = [
   },
 ];
 
+const FALLBACK_HERO_TITLE = 'Imunify360 Security License';
+const FALLBACK_HERO_SUBTITLE = 'Imunify360 is an automated security solution for web servers that uses an advanced firewall and malware scanning for multi-layered protection.';
+
 export default function Imunify360License() {
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/imunify360')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   return (
     <main>
       <Header />
 
       {/* Schema.org for Pricing */}
-      <ProductSchema 
-        name="Imunify360 Security License" 
-        url="https://qazi.host/imunify360" 
+      <ProductSchema
+        name="Imunify360 Security License"
+        url="https://qazi.host/imunify360"
         currency="PKR"
-        plans={plans} 
+        plans={plans}
       />
-      
+
 
       <section className="page-hero blur-in visible">
         <HeroParticles glowColor="rgba(79, 70, 229, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">Imunify360 Security License</h1>
-            <p className="delay-2">Imunify360 is an automated security solution for web servers that uses an advanced firewall and malware scanning for multi-layered protection.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="imunify360" glowColor="rgba(79, 70, 229, 0.4)" />

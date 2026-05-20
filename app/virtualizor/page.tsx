@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProductSchema from '../components/ProductSchema';
 import Header from '../components/Header';
@@ -28,7 +29,16 @@ import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 import SetupGuide from '../components/SetupGuide';
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: Array<{ label: string; value: string }>;
+};
+
+const FALLBACK_PLANS: Plan[] = [
   {
     name: 'Virtualizor',
     price: 'PKR 1000.00',
@@ -45,7 +55,28 @@ const plans = [
   },
 ];
 
+const FALLBACK_HERO_TITLE = 'Virtualizor VPS Panel License';
+const FALLBACK_HERO_SUBTITLE = 'Virtualizor is a powerful web-based VPS control panel that allows server administrators to create and manage virtual private servers across multiple virtualization technologies like KVM, Xen, and OpenVZ.';
+
 export default function VirtualizorLicense() {
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/virtualizor')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   return (
     <main>
       <Header />
@@ -63,8 +94,8 @@ export default function VirtualizorLicense() {
         <HeroParticles glowColor="rgba(139, 92, 246, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">Virtualizor VPS Panel License</h1>
-            <p className="delay-2">Virtualizor is a powerful web-based VPS control panel that allows server administrators to create and manage virtual private servers across multiple virtualization technologies like KVM, Xen, and OpenVZ.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="virtualizor" glowColor="rgba(139, 92, 246, 0.4)" />

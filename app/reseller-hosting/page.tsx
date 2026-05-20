@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import ProductSchema from '../components/ProductSchema';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -27,7 +28,19 @@ const RelatedBlogs = dynamic(() => import('../components/RelatedBlogs'), {
 import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: { label: string; value: string }[];
+};
+
+const FALLBACK_HERO_TITLE = 'Cheap Reseller Hosting Plans';
+const FALLBACK_HERO_SUBTITLE = "Welcome to Qazi.Host, your one-stop shop for cheap and super-fast 100% DMCA Ignored reseller hosting. Our fast reseller hosting plans are designed to meet your website's need for speed, with top-of-the-line hardware and software configurations. And don't worry about breaking the bank - our cheap hosting prices won't hurt your wallet. Plus, we're proud to offer DMCA-friendly reseller hosting, so you can focus on growing your business without legal hassles. With our expert support team available Mon-Fri, you can count on us to keep your website running at lightning speed. Join us at Qazi Host and experience the power of affordable, super-fast, and DMCA-friendly reseller hosting.";
+
+const FALLBACK_PLANS: Plan[] = [
   {
     name: 'Reseller 0',
     price: 'PKR 999.00',
@@ -211,25 +224,45 @@ const plans = [
 ];
 
 export default function ResellerHosting() {
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/reseller-hosting')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   return (
     <main>
       <Header />
 
       {/* Schema.org for Pricing */}
-      <ProductSchema 
-        name="Reseller Hosting" 
-        url="https://qazi.host/reseller-hosting" 
+      <ProductSchema
+        name="Reseller Hosting"
+        url="https://qazi.host/reseller-hosting"
         currency="PKR"
-        plans={plans} 
+        plans={plans}
       />
-      
+
 
       <section className="page-hero blur-in visible">
         <HeroParticles glowColor="rgba(139, 92, 246, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">Cheap Reseller Hosting Plans</h1>
-            <p className="delay-2">Welcome to Qazi.Host, your one-stop shop for cheap and super-fast 100% DMCA Ignored reseller hosting. Our fast reseller hosting plans are designed to meet your website&apos;s need for speed, with top-of-the-line hardware and software configurations. And don&apos;t worry about breaking the bank - our cheap hosting prices won&apos;t hurt your wallet. Plus, we&apos;re proud to offer DMCA-friendly reseller hosting, so you can focus on growing your business without legal hassles. With our expert support team available Mon-Fri, you can count on us to keep your website running at lightning speed. Join us at Qazi Host and experience the power of affordable, super-fast, and DMCA-friendly reseller hosting.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="reseller" glowColor="rgba(139, 92, 246, 0.4)" />

@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import ProductSchema from '../components/ProductSchema';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -19,78 +20,121 @@ const RelatedBlogs = dynamic(() => import('../components/RelatedBlogs'), {
 import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 
+// NOTE: The local fallback uses { features: string[], pkr } shape while the
+// DB/API uses the standard ProductPlan shape { specs: {label,value}[] }.
+// We render each shape with the matching layout so both work.
+type FallbackPlan = {
+  name: string;
+  price: string;
+  pkr: string;
+  features: string[];
+  popular?: boolean;
+};
+
+type DbPlan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: { label: string; value: string }[];
+};
+
+const FALLBACK_HERO_TITLE = 'Dedicated Servers';
+const FALLBACK_HERO_SUBTITLE = 'Enterprise-grade bare metal servers with maximum performance, 100% DMCA Ignored, and unmetered bandwidth in Netherlands.';
+
+const FALLBACK_PLANS: FallbackPlan[] = [
+  {
+    name: 'DEDI 1',
+    price: '€59',
+    pkr: 'PKR 18,200',
+    features: [
+      'Dual E5-2620 v3',
+      '12 Cores / 24 Threads',
+      '64 GB DDR4 RAM',
+      '500 GB SSD Disk',
+      '100TB @ 1GBPS',
+      'Netherlands Datacenter',
+      'DMCA Ignored (Optional)',
+      'Free Setup',
+      'Mon-Fri Support'
+    ]
+  },
+  {
+    name: 'DEDI 2',
+    price: '€69',
+    pkr: 'PKR 21,300',
+    features: [
+      'E5-2630 v3',
+      '16 Cores / 32 Threads',
+      '64 GB DDR4 RAM',
+      '500 GB SSD Disk',
+      '100TB @ 1GBPS',
+      'Netherlands Datacenter',
+      'DMCA Ignored (Optional)',
+      'Free Setup',
+      'Mon-Fri Support'
+    ],
+    popular: true
+  },
+  {
+    name: 'DEDI 3',
+    price: '€110',
+    pkr: 'PKR 33,900',
+    features: [
+      'Gold 6150 CPU',
+      '18 Cores / 36 Threads',
+      '128 GB DDR4 RAM',
+      '1 TB NVMe SSD Disk',
+      'Unmetered @ 1GBPS',
+      'Netherlands Datacenter',
+      'DMCA Ignored (Optional)',
+      'Free Setup',
+      'Mon-Fri Support'
+    ]
+  },
+];
+
 export default function DedicatedServers() {
-  const plans = [
-    { 
-      name: 'DEDI 1', 
-      price: '€59', 
-      pkr: 'PKR 18,200', 
-      features: [
-        'Dual E5-2620 v3', 
-        '12 Cores / 24 Threads', 
-        '64 GB DDR4 RAM', 
-        '500 GB SSD Disk', 
-        '100TB @ 1GBPS',
-        'Netherlands Datacenter',
-        'DMCA Ignored (Optional)',
-        'Free Setup',
-        'Mon-Fri Support'
-      ] 
-    },
-    { 
-      name: 'DEDI 2', 
-      price: '€69', 
-      pkr: 'PKR 21,300', 
-      features: [
-        'E5-2630 v3', 
-        '16 Cores / 32 Threads', 
-        '64 GB DDR4 RAM', 
-        '500 GB SSD Disk', 
-        '100TB @ 1GBPS',
-        'Netherlands Datacenter',
-        'DMCA Ignored (Optional)',
-        'Free Setup',
-        'Mon-Fri Support'
-      ], 
-      popular: true 
-    },
-    { 
-      name: 'DEDI 3', 
-      price: '€110', 
-      pkr: 'PKR 33,900', 
-      features: [
-        'Gold 6150 CPU', 
-        '18 Cores / 36 Threads', 
-        '128 GB DDR4 RAM', 
-        '1 TB NVMe SSD Disk', 
-        'Unmetered @ 1GBPS',
-        'Netherlands Datacenter',
-        'DMCA Ignored (Optional)',
-        'Free Setup',
-        'Mon-Fri Support'
-      ] 
-    },
-  ];
+  const [dbPlans, setDbPlans] = useState<DbPlan[] | null>(null);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/dedicated-servers')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setDbPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   return (
     <main>
       <Header />
 
       {/* Schema.org for Pricing */}
-      <ProductSchema 
-        name="Dedicated Servers" 
-        url="https://qazi.host/dedicated-servers" 
+      <ProductSchema
+        name="Dedicated Servers"
+        url="https://qazi.host/dedicated-servers"
         currency="EUR"
-        plans={plans} 
+        plans={dbPlans ?? FALLBACK_PLANS}
       />
-      
+
 
       <section className="page-hero blur-in visible">
         <HeroParticles glowColor="rgba(245, 158, 11, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">Dedicated Servers</h1>
-            <p className="delay-2">Enterprise-grade bare metal servers with maximum performance, 100% DMCA Ignored, and unmetered bandwidth in Netherlands.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="dedicated" glowColor="rgba(245, 158, 11, 0.4)" />
@@ -102,15 +146,25 @@ export default function DedicatedServers() {
       <section className="pricing-section">
         <div className="container">
           <div className="pricing-grid">
-            {plans.map((plan, i) => (
-              <div key={i} className={`pricing-card hover-card ${plan.popular ? 'popular' : ''}`}>
-                {plan.popular && <div className="popular-badge">Best Value</div>}
-                <h3>{plan.name}</h3>
-                <PriceDisplay usd={plan.price} pkr={plan.pkr} period="/month" />
-                <ul className="pricing-features">{plan.features.map((f, j) => <li key={j}>{f}</li>)}</ul>
-                <a href={`https://wa.me/923043126626?text=Hi%2C%20I%20want%20to%20order%20the%20Dedicated%20Server%20${plan.name}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block' }}>Order Now</a>
-              </div>
-            ))}
+            {dbPlans
+              ? dbPlans.map((plan, i) => (
+                <div key={i} className={`pricing-card hover-card ${plan.popular ? 'popular' : ''}`}>
+                  {plan.popular && <div className="popular-badge">Best Value</div>}
+                  <h3>{plan.name}</h3>
+                  <PriceDisplay usd={plan.price} pkr={''} period="/month" />
+                  <ul className="pricing-features">{plan.specs.map((s, j) => <li key={j}>{s.label}: {s.value}</li>)}</ul>
+                  <a href={plan.orderLink ?? `https://wa.me/923043126626?text=Hi%2C%20I%20want%20to%20order%20the%20Dedicated%20Server%20${plan.name}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block' }}>Order Now</a>
+                </div>
+              ))
+              : FALLBACK_PLANS.map((plan, i) => (
+                <div key={i} className={`pricing-card hover-card ${plan.popular ? 'popular' : ''}`}>
+                  {plan.popular && <div className="popular-badge">Best Value</div>}
+                  <h3>{plan.name}</h3>
+                  <PriceDisplay usd={plan.price} pkr={plan.pkr} period="/month" />
+                  <ul className="pricing-features">{plan.features.map((f, j) => <li key={j}>{f}</li>)}</ul>
+                  <a href={`https://wa.me/923043126626?text=Hi%2C%20I%20want%20to%20order%20the%20Dedicated%20Server%20${plan.name}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block' }}>Order Now</a>
+                </div>
+              ))}
           </div>
 
           <div className="warnings-container" style={{ marginTop: '64px', marginBottom: '80px' }}>

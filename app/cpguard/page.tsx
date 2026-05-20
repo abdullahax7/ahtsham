@@ -1,19 +1,20 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProductSchema from '../components/ProductSchema';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import LoadingSkeleton from '../components/LoadingSkeleton';
-import { 
-  ShieldCheck, 
-  Zap, 
-  HardDrive, 
-  Lock, 
-  Package, 
-  LayoutDashboard, 
-  Globe, 
-  MessageSquare 
+import {
+  ShieldCheck,
+  Zap,
+  HardDrive,
+  Lock,
+  Package,
+  LayoutDashboard,
+  Globe,
+  MessageSquare
 } from 'lucide-react';
 
 const PremiumGuarantees = dynamic(() => import('../components/PremiumGuarantees'), {
@@ -28,7 +29,16 @@ import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 import SetupGuide from '../components/SetupGuide';
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: Array<{ label: string; value: string }>;
+};
+
+const FALLBACK_PLANS: Plan[] = [
   {
     name: 'CPGuard',
     price: 'PKR 550.00',
@@ -45,26 +55,47 @@ const plans = [
   },
 ];
 
+const FALLBACK_HERO_TITLE = 'cpGuard Security License';
+const FALLBACK_HERO_SUBTITLE = 'cpGuard is a specialized security solution for cPanel servers that provides real-time malware scanning and vulnerability management.';
+
 export default function CpguardLicense() {
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/public/product/cpguard')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((p) => {
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   return (
     <main>
       <Header />
 
       {/* Schema.org for Pricing */}
-      <ProductSchema 
-        name="cpGuard Security License" 
-        url="https://qazi.host/cpguard" 
+      <ProductSchema
+        name="cpGuard Security License"
+        url="https://qazi.host/cpguard"
         currency="PKR"
-        plans={plans} 
+        plans={plans}
       />
-      
+
 
       <section className="page-hero blur-in visible">
         <HeroParticles glowColor="rgba(34, 197, 94, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">cpGuard Security License</h1>
-            <p className="delay-2">cpGuard is a specialized security solution for cPanel servers that provides real-time malware scanning and vulnerability management.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="cpguard" glowColor="rgba(34, 197, 94, 0.4)" />

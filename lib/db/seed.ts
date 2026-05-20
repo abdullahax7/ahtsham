@@ -162,6 +162,45 @@ const SITE_SETTINGS: { key: string; value: string; type?: string }[] = [
   { key: "footer_about", value: "Your trusted partner for premium DMCA Ignored hosting and shared licenses. Powering thousands of websites with industrial-grade infrastructure.", type: "text" },
   { key: "footer_copyright_suffix", value: "Pakistan's #1 DMCA Ignored Hosting." },
   { key: "support_hours", value: "Mon-Fri: 12PM - 12AM PST" },
+  // Status bar
+  { key: "status_bar_text", value: "All Systems Operational" },
+  { key: "status_bar_uptime", value: "Uptime: 99.9%" },
+  { key: "status_bar_servers", value: "12 Servers Online" },
+  // Homepage search & hero CTA
+  { key: "search_placeholder", value: "Search for hosting, servers, licenses..." },
+  { key: "hero_cta_label", value: "View Featured Plans" },
+  // Homepage — Featured Section
+  { key: "featured_section_label", value: "DMCA Ignored" },
+  { key: "featured_section_title", value: "DMCA Ignored Hostings & Cheap Shared Licenses" },
+  { key: "featured_section_desc", value: "Welcome to our rebel's corner – DMCA Ignored Shared Hosting! No copyright drama here, just a space where your website can kick back, relax, and do its thing. Perfect for newbies or those rocking a single page sites with less traffic. Your content, your rules. Now let's talk about our DMCA Ignored Reseller Hosting plan – your content's safe heaven with no copyright headaches! Ideal for content-rich sites with lots of traffic, because here, your website rules the internet kingdom worry-free.", type: "textarea" },
+  // Homepage — Featured Cards
+  { key: "shared_card_tag", value: "Most Selling" },
+  { key: "shared_card_title", value: "Shared Hosting" },
+  { key: "shared_card_desc", value: "Perfect for personal websites, blogs, and small businesses. NVMe SSD, free SSL, and cPanel included.", type: "textarea" },
+  { key: "reseller_card_tag", value: "Best Offer" },
+  { key: "reseller_card_title", value: "Reseller Hosting" },
+  { key: "reseller_card_desc", value: "Start your own hosting business with WHM/cPanel, free WHMCS, and white-label branding.", type: "textarea" },
+  { key: "licenses_card_tag", value: "Instant Activation" },
+  { key: "licenses_card_title", value: "Licenses" },
+  { key: "licenses_card_desc", value: "cPanel, Plesk, LiteSpeed, and CloudLinux licenses at up to 40% off direct pricing.", type: "textarea" },
+  // Homepage — Dedicated / DMCA
+  { key: "dedicated_section_label", value: "Enterprise Solutions" },
+  { key: "dedicated_section_title", value: "100% DMCA Ignored Dedicated Servers" },
+  { key: "dedicated_section_desc", value: "QaziHost's 100% DMCA Ignored Dedicated Servers with Unbeatable Discounts on Server Licenses! Experience high-performance servers at remarkably affordable prices. Unlock the full potential of your hosting with our robust servers, and take advantage of exclusive discounts on server licenses for a cost-effective solution tailored to your needs.", type: "textarea" },
+  { key: "custom_packages_text", value: "<strong>Custom Packages:</strong> Need a custom server configuration? Contact us at <a href=\"https://wa.me/923043126626?text=Hi%2C%20I%20need%20a%20custom%20package\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: var(--green); text-decoration: underline; font-weight: 600;\">WhatsApp</a> and we will create it for you at reasonable prices.", type: "html" },
+  { key: "prohibited_text", value: "<strong>STRICTLY PROHIBITED:</strong> Spamming / Phishing / Bruteforce / Floods / Attacks / Scanning / Pornography / Open Proxy / Malware Distribution / Botnets / Terrorist activities / Crypto Mining is STRICTLY NOT allowed. If found involved in such activities, your services will be suspended immediately with NO refund.", type: "html" },
+  // Homepage — Process
+  { key: "process_section_label", value: "Simple Process" },
+  { key: "process_section_title", value: "Get Started in Minutes" },
+  { key: "process_section_desc", value: "No complicated forms. Browse our plans, choose what you need, and complete your order via WhatsApp.", type: "textarea" },
+  // Homepage — Tech
+  { key: "tech_section_label", value: "Powered By" },
+  { key: "tech_section_title", value: "Technologies We Support" },
+  // Homepage — Final CTA
+  { key: "final_cta_title", value: "Ready to Launch?" },
+  { key: "final_cta_subtitle", value: "Join 5,000+ professionals who trust Qazi.Host for their infrastructure needs.", type: "textarea" },
+  { key: "final_cta_primary_label", value: "Get Started" },
+  { key: "final_cta_secondary_label", value: "Chat on WhatsApp" },
 ];
 
 export function runSeed() {

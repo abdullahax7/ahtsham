@@ -31,7 +31,19 @@ const RelatedBlogs = dynamic(() => import('../components/RelatedBlogs'), {
 import HeroParticles from '../components/HeroParticles';
 import LicenseLogo from '../components/LicenseLogo';
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  setup?: string;
+  popular?: boolean;
+  orderLink?: string;
+  specs: { label: string; value: string }[];
+};
+
+const FALLBACK_HERO_TITLE = 'Cheap Shared Hosting Plans';
+const FALLBACK_HERO_SUBTITLE = "Welcome to QaziHost's 100% DMCA Ignored Shared Hosting! Our cheap shared hosting plans are perfect for newbies starting their online businesses. With affordable prices and easy-to-use features, our plans provide everything you need to get your website up and running quickly.";
+
+const FALLBACK_PLANS: Plan[] = [
   {
     name: 'Shared 0',
     price: 'Rs. 499',
@@ -149,20 +161,25 @@ const plans = [
 ];
 
 export default function SharedHosting() {
-  const [livePlans, setLivePlans] = useState<typeof plans | null>(null);
+  const [plans, setPlans] = useState<Plan[]>(FALLBACK_PLANS);
+  const [heroTitle, setHeroTitle] = useState<string>(FALLBACK_HERO_TITLE);
+  const [heroSubtitle, setHeroSubtitle] = useState<string>(FALLBACK_HERO_SUBTITLE);
+
   useEffect(() => {
     let alive = true;
     fetch('/api/public/product/shared-hosting')
       .then((r) => (r.ok ? r.json() : null))
       .then((p) => {
-        if (alive && p?.plans?.length) setLivePlans(p.plans);
+        if (!alive || !p) return;
+        if (Array.isArray(p.plans) && p.plans.length) setPlans(p.plans);
+        if (p.page_content?.hero_title) setHeroTitle(p.page_content.hero_title);
+        if (p.page_content?.hero_subtitle) setHeroSubtitle(p.page_content.hero_subtitle);
       })
       .catch(() => {});
     return () => {
       alive = false;
     };
   }, []);
-  const renderedPlans = livePlans && livePlans.length > 0 ? livePlans : plans;
 
   return (
     <main>
@@ -173,16 +190,16 @@ export default function SharedHosting() {
         name="Shared Hosting"
         url="https://qazi.host/shared-hosting"
         currency="PKR"
-        plans={renderedPlans}
+        plans={plans}
       />
-      
+
 
       <section className="page-hero blur-in visible">
         <HeroParticles glowColor="rgba(16, 185, 129, 0.4)" />
         <div className="page-hero-content page-hero-content--split">
           <div className="hero-text">
-            <h1 className="delay-1">Cheap Shared Hosting Plans</h1>
-            <p className="delay-2">Welcome to QaziHost&apos;s 100% DMCA Ignored Shared Hosting! Our cheap shared hosting plans are perfect for newbies starting their online businesses. With affordable prices and easy-to-use features, our plans provide everything you need to get your website up and running quickly.</p>
+            <h1 className="delay-1">{heroTitle}</h1>
+            <p className="delay-2">{heroSubtitle}</p>
           </div>
           <div className="hero-logo-side">
             <LicenseLogo type="shared" glowColor="rgba(16, 185, 129, 0.4)" />
@@ -196,7 +213,7 @@ export default function SharedHosting() {
 
           {/* Pricing Grid */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '64px' }}>
-            {renderedPlans.map((plan, i) => (
+            {plans.map((plan, i) => (
               <div key={i} className="hover-card" style={{
                 background: plan.popular ? 'linear-gradient(135deg, rgba(59,130,246,0.12), rgba(248,87,39,0.08))' : 'var(--surface)',
                 border: plan.popular ? '2px solid rgba(59,130,246,0.5)' : '1px solid var(--border)',

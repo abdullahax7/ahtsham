@@ -132,7 +132,7 @@ export default function Home() {
 
   const handleResultSelect = (item: any) => {
     if (item.isDirectOrder && item.whatsappMessage) {
-      window.open(`https://wa.me/923043126626?text=${encodeURIComponent(item.whatsappMessage)}`, '_blank');
+      window.open(`https://wa.me/${siteCopy.whatsapp_number || '923043126626'}?text=${encodeURIComponent(item.whatsappMessage)}`, '_blank');
     } else {
       router.push(item.url);
     }
@@ -188,7 +188,7 @@ export default function Home() {
   const orderNow = (product: string, price: string, sku: string) => {
     // Redirect to external website for checkout
     const message = `Hi, I want to order ${product} (${price}) - SKU: ${sku}`;
-    window.open(`https://wa.me/923043126626?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${siteCopy.whatsapp_number || '923043126626'}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
 
@@ -201,11 +201,11 @@ export default function Home() {
       <div className="status-bar">
         <div className="status-bar-inner">
           <span className="status-dot"></span>
-          <span>All Systems Operational</span>
+          <span>{siteCopy.status_bar_text || 'All Systems Operational'}</span>
           <span className="status-separator">|</span>
-          <span className="status-uptime">Uptime: 99.9%</span>
+          <span className="status-uptime">{siteCopy.status_bar_uptime || 'Uptime: 99.9%'}</span>
           <span className="status-separator">|</span>
-          <span className="status-servers">12 Servers Online</span>
+          <span className="status-servers">{siteCopy.status_bar_servers || '12 Servers Online'}</span>
         </div>
       </div>
       <Header />
@@ -226,7 +226,7 @@ export default function Home() {
               <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
               <input
                 type="text"
-                placeholder="Search for hosting, servers, licenses..."
+                placeholder={siteCopy.search_placeholder || 'Search for hosting, servers, licenses...'}
                 className="search-input"
                 value={query}
                 onChange={(e) => {
@@ -287,7 +287,7 @@ export default function Home() {
             )}
           </div>
           <div className="hero-btns">
-            <Link href="#featured" className="btn btn-primary">View Featured Plans</Link>
+            <Link href="#featured" className="btn btn-primary">{siteCopy.hero_cta_label || 'View Featured Plans'}</Link>
           </div>
           <div className="hero-stats scale-up visible delay-4" ref={statsRef}>
             <div className="stat hover-card"><div className="stat-num">{counts.clients.toLocaleString()}+</div><div className="stat-label">Happy Clients</div></div>
@@ -301,20 +301,20 @@ export default function Home() {
       <section id="featured" className="featured-section alt-bg">
         <div className="container">
           <div className="section-head fade-up" style={{ textAlign: 'center' }}>
-            <div className="section-label">DMCA Ignored</div>
-            <h2 className="section-title">DMCA Ignored Hostings &amp; Cheap Shared Licenses</h2>
+            <div className="section-label">{siteCopy.featured_section_label || 'DMCA Ignored'}</div>
+            <h2 className="section-title">{siteCopy.featured_section_title || 'DMCA Ignored Hostings & Cheap Shared Licenses'}</h2>
             <p className="section-sub" style={{ margin: '0 auto', maxWidth: '800px' }}>
-              Welcome to our rebel&apos;s corner – DMCA Ignored Shared Hosting! No copyright drama here, just a space where your website can kick back, relax, and do its thing. Perfect for newbies or those rocking a single page sites with less traffic. Your content, your rules. Now let&apos;s talk about our DMCA Ignored Reseller Hosting plan – your content&apos;s safe heaven with no copyright headaches! Ideal for content-rich sites with lots of traffic, because here, your website rules the internet kingdom worry-free.
+              {siteCopy.featured_section_desc || "Welcome to our rebel's corner – DMCA Ignored Shared Hosting! No copyright drama here, just a space where your website can kick back, relax, and do its thing. Perfect for newbies or those rocking a single page sites with less traffic. Your content, your rules. Now let's talk about our DMCA Ignored Reseller Hosting plan – your content's safe heaven with no copyright headaches! Ideal for content-rich sites with lots of traffic, because here, your website rules the internet kingdom worry-free."}
             </p>
           </div>
 
           <div className="pricing-grid">
             <div className="pricing-card hover-card fade-up delay-1">
-              <div className="card-tag tag-selling">Most Selling</div>
-              <h3>Shared Hosting</h3>
+              <div className="card-tag tag-selling">{siteCopy.shared_card_tag || 'Most Selling'}</div>
+              <h3>{siteCopy.shared_card_title || 'Shared Hosting'}</h3>
               <div className="pricing-starting">Starting from</div>
               <PriceDisplay usd="$1.99" pkr="499 PKR" />
-              <p className="card-desc">Perfect for personal websites, blogs, and small businesses. NVMe SSD, free SSL, and cPanel included.</p>
+              <p className="card-desc">{siteCopy.shared_card_desc || 'Perfect for personal websites, blogs, and small businesses. NVMe SSD, free SSL, and cPanel included.'}</p>
               <ul className="pricing-features">
                 <li>Up to Unlimited Websites</li>
                 <li>NVMe SSD Storage</li>
@@ -326,11 +326,11 @@ export default function Home() {
             </div>
 
             <div className="pricing-card hover-card fade-up delay-2">
-              <div className="card-tag tag-offer">Best Offer</div>
-              <h3>Reseller Hosting</h3>
+              <div className="card-tag tag-offer">{siteCopy.reseller_card_tag || 'Best Offer'}</div>
+              <h3>{siteCopy.reseller_card_title || 'Reseller Hosting'}</h3>
               <div className="pricing-starting">Starting from</div>
               <PriceDisplay usd="$9.99" pkr="999 PKR" />
-              <p className="card-desc">Start your own hosting business with WHM/cPanel, free WHMCS, and white-label branding.</p>
+              <p className="card-desc">{siteCopy.reseller_card_desc || 'Start your own hosting business with WHM/cPanel, free WHMCS, and white-label branding.'}</p>
               <ul className="pricing-features">
                 <li>Free WHMCS License</li>
                 <li>WHM/cPanel Access</li>
@@ -342,11 +342,11 @@ export default function Home() {
             </div>
 
             <div className="pricing-card hover-card fade-up delay-3">
-              <div className="card-tag tag-new">Instant Activation</div>
-              <h3>Licenses</h3>
+              <div className="card-tag tag-new">{siteCopy.licenses_card_tag || 'Instant Activation'}</div>
+              <h3>{siteCopy.licenses_card_title || 'Licenses'}</h3>
               <div className="pricing-starting">Starting from</div>
               <PriceDisplay usd="$8" pkr="PKR 350" />
-              <p className="card-desc">cPanel, Plesk, LiteSpeed, and CloudLinux licenses at up to 40% off direct pricing.</p>
+              <p className="card-desc">{siteCopy.licenses_card_desc || 'cPanel, Plesk, LiteSpeed, and CloudLinux licenses at up to 40% off direct pricing.'}</p>
               <ul className="pricing-features">
                 <li>cPanel/WHM from $12/mo</li>
                 <li>LiteSpeed from $8/mo</li>
@@ -369,18 +369,18 @@ export default function Home() {
       <section className="dmca-section">
         <div className="container">
           <div className="section-head fade-up" style={{ textAlign: 'center' }}>
-            <div className="section-label">Enterprise Solutions</div>
-            <h2 className="section-title">100% DMCA Ignored Dedicated Servers</h2>
+            <div className="section-label">{siteCopy.dedicated_section_label || 'Enterprise Solutions'}</div>
+            <h2 className="section-title">{siteCopy.dedicated_section_title || '100% DMCA Ignored Dedicated Servers'}</h2>
           </div>
 
           <div className="dedicated-ad-banner fade-up">
             <div className="dedicated-ad-content">
               <p className="dedicated-ad-text">
-                QaziHost&apos;s 100% DMCA Ignored Dedicated Servers with Unbeatable Discounts on Server Licenses! Experience high-performance servers at remarkably affordable prices. Unlock the full potential of your hosting with our robust servers, and take advantage of exclusive discounts on server licenses for a cost-effective solution tailored to your needs.
+                {siteCopy.dedicated_section_desc || "QaziHost's 100% DMCA Ignored Dedicated Servers with Unbeatable Discounts on Server Licenses! Experience high-performance servers at remarkably affordable prices. Unlock the full potential of your hosting with our robust servers, and take advantage of exclusive discounts on server licenses for a cost-effective solution tailored to your needs."}
               </p>
               <div className="dedicated-ad-btns">
                 <Link href="/dedicated-servers" className="btn btn-primary" style={{ padding: '14px 32px' }}>Explore Dedicated Servers →</Link>
-                <a href="https://wa.me/923043126626?text=Hi%2C%20I%20need%20a%20custom%20dedicated%20server" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '14px 32px' }}>Custom Quote</a>
+                <a href={`https://wa.me/${siteCopy.whatsapp_number || '923043126626'}?text=${encodeURIComponent('Hi, I need a custom dedicated server')}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '14px 32px' }}>Custom Quote</a>
               </div>
             </div>
             <div className="dedicated-ad-visual">
@@ -399,10 +399,10 @@ export default function Home() {
 
           <div className="warnings-container fade-up">
             <div className="warning-box warning-info">
-              <strong>Custom Packages:</strong> Need a custom server configuration? Contact us at <a href="https://wa.me/923043126626?text=Hi%2C%20I%20need%20a%20custom%20package" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--green)', textDecoration: 'underline', fontWeight: 600 }}>WhatsApp</a> and we will create it for you at reasonable prices.
+              <span dangerouslySetInnerHTML={{ __html: siteCopy.custom_packages_text || `<strong>Custom Packages:</strong> Need a custom server configuration? Contact us at <a href="https://wa.me/${siteCopy.whatsapp_number || '923043126626'}?text=Hi%2C%20I%20need%20a%20custom%20package" target="_blank" rel="noopener noreferrer" style="color: var(--green); text-decoration: underline; font-weight: 600;">WhatsApp</a> and we will create it for you at reasonable prices.` }} />
             </div>
             <div className="warning-box warning-danger">
-              <strong>STRICTLY PROHIBITED:</strong> Spamming / Phishing / Bruteforce / Floods / Attacks / Scanning / Pornography / Open Proxy / Malware Distribution / Botnets / Terrorist activities / Crypto Mining is STRICTLY NOT allowed. If found involved in such activities, your services will be suspended immediately with NO refund.
+              <span dangerouslySetInnerHTML={{ __html: siteCopy.prohibited_text || '<strong>STRICTLY PROHIBITED:</strong> Spamming / Phishing / Bruteforce / Floods / Attacks / Scanning / Pornography / Open Proxy / Malware Distribution / Botnets / Terrorist activities / Crypto Mining is STRICTLY NOT allowed. If found involved in such activities, your services will be suspended immediately with NO refund.' }} />
             </div>
           </div>
         </div>
@@ -427,7 +427,7 @@ export default function Home() {
               </p>
 
               <div className="ceo-social-links">
-                <a href="https://wa.me/923043126626" target="_blank" rel="noopener noreferrer" style={{ color: '#25D366', transition: 'transform 0.3s ease', margin: '3px' }} title="03043126626">
+                <a href={`https://wa.me/${siteCopy.whatsapp_number || '923043126626'}`} target="_blank" rel="noopener noreferrer" style={{ color: '#25D366', transition: 'transform 0.3s ease', margin: '3px' }} title="03043126626">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
                 </a>
                 <a href="https://facebook.com/qazi.host" target="_blank" rel="noopener noreferrer" style={{ color: '#1877F2', transition: 'transform 0.3s ease', margin: '3px' }} title="@qazi.host">
@@ -445,9 +445,9 @@ export default function Home() {
       <section id="how">
         <div className="container">
           <div className="section-head fade-up" style={{ textAlign: 'center', margin: '0 auto 56px', maxWidth: '600px' }}>
-            <div className="section-label">Simple Process</div>
-            <h2 className="section-title">Get Started in Minutes</h2>
-            <p className="section-sub" style={{ maxWidth: '100%' }}>No complicated forms. Browse our plans, choose what you need, and complete your order via WhatsApp.</p>
+            <div className="section-label">{siteCopy.process_section_label || 'Simple Process'}</div>
+            <h2 className="section-title">{siteCopy.process_section_title || 'Get Started in Minutes'}</h2>
+            <p className="section-sub" style={{ maxWidth: '100%' }}>{siteCopy.process_section_desc || 'No complicated forms. Browse our plans, choose what you need, and complete your order via WhatsApp.'}</p>
           </div>
           <div className="process">
             <div className="step hover-card fade-up delay-1">
@@ -469,8 +469,8 @@ export default function Home() {
       {/* ── Tech Stack Infinite Slider ── */}
       <section className="tech-slider-section">
         <div className="container" style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <div className="section-label">Powered By</div>
-          <h2 className="section-title">Technologies We Support</h2>
+          <div className="section-label">{siteCopy.tech_section_label || 'Powered By'}</div>
+          <h2 className="section-title">{siteCopy.tech_section_title || 'Technologies We Support'}</h2>
         </div>
         <div className="tech-slider-wrapper">
           <div className="tech-slider-track">
@@ -589,11 +589,11 @@ export default function Home() {
             <div className="cta-deco cta-deco-right" aria-hidden="true">
               <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><rect x="10" y="10" width="80" height="80" rx="16" stroke="rgba(59,130,246,0.25)" strokeWidth="1.5" strokeDasharray="6 4" transform="rotate(15 50 50)" /><rect x="30" y="30" width="40" height="40" rx="8" stroke="rgba(248,87,39,0.2)" strokeWidth="1" /></svg>
             </div>
-            <h2>Ready to Launch?</h2>
-            <p>Join 5,000+ professionals who trust Qazi.Host for their infrastructure needs.</p>
+            <h2>{siteCopy.final_cta_title || 'Ready to Launch?'}</h2>
+            <p>{siteCopy.final_cta_subtitle || 'Join 5,000+ professionals who trust Qazi.Host for their infrastructure needs.'}</p>
             <div className="cta-btns">
-              <a href="https://wa.me/923043126626?text=Hi%20Qazi.Host%2C%20I'm%20interested%20in%20your%20services%20and%20have%20some%20questions." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '14px 32px', fontSize: '1rem' }}>Get Started</a>
-              <a href="https://wa.me/923043126626?text=Hi%20Qazi.Host%2C%20I'm%20interested%20in%20your%20services%20and%20have%20some%20questions." target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '14px 32px', fontSize: '1rem' }}>Chat on WhatsApp</a>
+              <a href={`https://wa.me/${siteCopy.whatsapp_number || '923043126626'}?text=${encodeURIComponent(siteCopy.whatsapp_default_message || "Hi Qazi.Host, I'm interested in your services and have some questions.")}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '14px 32px', fontSize: '1rem' }}>{siteCopy.final_cta_primary_label || 'Get Started'}</a>
+              <a href={`https://wa.me/${siteCopy.whatsapp_number || '923043126626'}?text=${encodeURIComponent(siteCopy.whatsapp_default_message || "Hi Qazi.Host, I'm interested in your services and have some questions.")}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '14px 32px', fontSize: '1rem' }}>{siteCopy.final_cta_secondary_label || 'Chat on WhatsApp'}</a>
             </div>
           </div>
         </div>
