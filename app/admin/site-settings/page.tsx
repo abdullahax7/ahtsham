@@ -25,14 +25,10 @@ const GROUPS: Group[] = [
     ],
   },
   {
-    title: 'Status bar & Status Page',
-    description: 'Top status strip shown above the header, and the iframe used on the /status page. The status bar is clickable and points to the link below.',
+    title: 'Status Page',
+    description: 'The /status page embeds whatever URL you set below in an iframe. Use this to point at an external uptime monitor (Better Stack, UptimeRobot, etc).',
     fields: [
-      { key: 'status_bar_text', label: 'Status Text' },
-      { key: 'status_bar_uptime', label: 'Uptime Text' },
-      { key: 'status_bar_servers', label: 'Servers Text' },
-      { key: 'status_page_link', label: 'Status Bar Link (where clicking the top bar takes visitors — usually /status or your external status page URL)', type: 'url' },
-      { key: 'status_iframe_url', label: 'Status Page Iframe URL (embedded on /status)', type: 'url' },
+      { key: 'status_iframe_url', label: 'Status Page Iframe URL', type: 'url' },
     ],
   },
   {

@@ -196,29 +196,8 @@ export default function Home() {
 
 
 
-  const statusHref = siteCopy.status_page_link || '/status';
-  const statusIsExternal = /^https?:\/\//i.test(statusHref);
   return (
     <main>
-      <a
-        className="status-bar"
-        href={statusHref}
-        target={statusIsExternal ? '_blank' : undefined}
-        rel={statusIsExternal ? 'noopener noreferrer' : undefined}
-        aria-label="View live server status"
-        style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
-      >
-        <div className="status-bar-inner">
-          <span className="status-dot"></span>
-          <span>{siteCopy.status_bar_text || 'All Systems Operational'}</span>
-          <span className="status-separator">|</span>
-          <span className="status-uptime">{siteCopy.status_bar_uptime || 'Uptime: 99.9%'}</span>
-          <span className="status-separator">|</span>
-          <span className="status-servers">{siteCopy.status_bar_servers || '12 Servers Online'}</span>
-          <span className="status-separator">|</span>
-          <span style={{ opacity: 0.85, fontWeight: 600 }}>View status →</span>
-        </div>
-      </a>
       <Header />
 
       <section className="hero" id="home">
