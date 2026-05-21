@@ -1,5 +1,6 @@
 import "server-only";
 import { sqlite } from "./client";
+import fallbackPlans from "./fallback-plans.json";
 
 // Seeds initial data only when tables are empty. Safe to call on every boot.
 
@@ -349,6 +350,20 @@ export function runSeed() {
     if (payCount === 0) {
       const insertP = sqlite.prepare("INSERT INTO payment_methods (name, image_url, sort_order) VALUES (?,?,?)");
       PAYMENTS.forEach((p, i) => insertP.run(p.name, p.image_url ?? null, i));
+    }
+
+    // products — backfill plans for any existing product whose `plans`
+    // column is still empty. Each product page used to have its plans
+    // hard-coded in TSX; we extract those once into fallback-plans.json
+    // (see scripts/extract-fallback-plans.mjs) and copy them into the DB so
+    // the admin editor and dynamic renderers both see them. This is
+    // idempotent: rows already populated by an admin edit are left alone.
+    const findEmpty = sqlite.prepare("SELECT slug FROM products WHERE COALESCE(plans, '[]') IN ('[]', '') AND slug = ?");
+    const updatePlans = sqlite.prepare("UPDATE products SET plans = ?, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE slug = ?");
+    for (const [slug, plans] of Object.entries(fallbackPlans as Record<string, unknown[]>)) {
+      if (!Array.isArray(plans) || plans.length === 0) continue;
+      if (!findEmpty.get(slug)) continue;
+      updatePlans.run(JSON.stringify(plans), slug);
     }
   });
   // BEGIN IMMEDIATE so concurrent processes (e.g. parallel `next build`

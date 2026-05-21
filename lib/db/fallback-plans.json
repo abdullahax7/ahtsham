@@ -1,0 +1,1536 @@
+{
+  "shared-hosting": [
+    {
+      "name": "Shared 0",
+      "price": "Rs. 499",
+      "setup": "Rs. 50 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=67",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "1"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "1024 MB (1 GB)"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "5120 MB (5 GB)"
+        },
+        {
+          "label": "FTPs",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL",
+          "value": "Free"
+        },
+        {
+          "label": "Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Basic"
+        }
+      ]
+    },
+    {
+      "name": "Shared 1",
+      "price": "Rs. 999",
+      "setup": "Rs. 50 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=6",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "3"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "5120 MB (5 GB)"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "15360 MB (15 GB)"
+        },
+        {
+          "label": "FTPs",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL",
+          "value": "Free"
+        },
+        {
+          "label": "Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Basic"
+        }
+      ]
+    },
+    {
+      "name": "Shared 2",
+      "price": "Rs. 1,799",
+      "setup": "Rs. 50 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=8",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "5"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "10240 MB (10 GB)"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "20480 MB (20 GB)"
+        },
+        {
+          "label": "FTPs",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL",
+          "value": "Free"
+        },
+        {
+          "label": "Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Basic"
+        }
+      ]
+    },
+    {
+      "name": "Shared 3",
+      "price": "Rs. 2,999",
+      "setup": "Rs. 50 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=9",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "10"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "10240 MB (10 GB)"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTPs",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL",
+          "value": "Free"
+        },
+        {
+          "label": "Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Basic"
+        }
+      ]
+    },
+    {
+      "name": "Shared 4",
+      "price": "Rs. 3,999",
+      "setup": "Rs. 50 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=65",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "15"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "15360 MB (15 GB)"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTPs",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL",
+          "value": "Free"
+        },
+        {
+          "label": "Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Basic"
+        }
+      ]
+    },
+    {
+      "name": "Shared 5",
+      "price": "Rs. 4,999",
+      "setup": "Rs. 50 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=66",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "20"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "Unlimited"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTPs",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL",
+          "value": "Free"
+        },
+        {
+          "label": "Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Basic"
+        }
+      ]
+    }
+  ],
+  "reseller-hosting": [
+    {
+      "name": "Reseller 0",
+      "price": "PKR 999.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=55",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "1"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "2560 MB"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 1",
+      "price": "PKR 1499.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=2",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "2"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "5120 MB"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 2",
+      "price": "PKR 2999.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=3",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "5"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "10240 MB"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 3",
+      "price": "PKR 4999.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=5",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "10"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "10GB/Site"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 4",
+      "price": "PKR 6999.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=63",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "15"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "10GB/Site"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 5",
+      "price": "PKR 9999.00",
+      "setup": "PKR 50.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=64",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "25"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "15GB/Site"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 6",
+      "price": "PKR 11999.00",
+      "setup": "",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=69",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "40"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "15GB/Site"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 7",
+      "price": "PKR 16999.00",
+      "setup": "",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=74",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "60"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "15GB/Site"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Reseller 8",
+      "price": "PKR 20999.00",
+      "setup": "",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=75",
+      "specs": [
+        {
+          "label": "Websites",
+          "value": "80"
+        },
+        {
+          "label": "NVMe Storage",
+          "value": "15GB/Site"
+        },
+        {
+          "label": "Bandwidth",
+          "value": "Unlimited"
+        },
+        {
+          "label": "FTP Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "Free"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Powered By",
+          "value": "LiteSpeed"
+        },
+        {
+          "label": "Control Panel",
+          "value": "cPanel"
+        },
+        {
+          "label": "DMCA Ignored",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "dedicated-servers": [
+    {
+      "name": "DEDI 1",
+      "price": "€59",
+      "setup": "PKR 18,200",
+      "popular": false,
+      "orderLink": "",
+      "specs": [
+        {
+          "label": "",
+          "value": "Dual E5-2620 v3"
+        },
+        {
+          "label": "",
+          "value": "12 Cores / 24 Threads"
+        },
+        {
+          "label": "",
+          "value": "64 GB DDR4 RAM"
+        },
+        {
+          "label": "",
+          "value": "500 GB SSD Disk"
+        },
+        {
+          "label": "",
+          "value": "100TB @ 1GBPS"
+        },
+        {
+          "label": "",
+          "value": "Netherlands Datacenter"
+        },
+        {
+          "label": "",
+          "value": "DMCA Ignored (Optional)"
+        },
+        {
+          "label": "",
+          "value": "Free Setup"
+        },
+        {
+          "label": "",
+          "value": "Mon-Fri Support"
+        }
+      ]
+    },
+    {
+      "name": "DEDI 2",
+      "price": "€69",
+      "setup": "PKR 21,300",
+      "popular": true,
+      "orderLink": "",
+      "specs": [
+        {
+          "label": "",
+          "value": "E5-2630 v3"
+        },
+        {
+          "label": "",
+          "value": "16 Cores / 32 Threads"
+        },
+        {
+          "label": "",
+          "value": "64 GB DDR4 RAM"
+        },
+        {
+          "label": "",
+          "value": "500 GB SSD Disk"
+        },
+        {
+          "label": "",
+          "value": "100TB @ 1GBPS"
+        },
+        {
+          "label": "",
+          "value": "Netherlands Datacenter"
+        },
+        {
+          "label": "",
+          "value": "DMCA Ignored (Optional)"
+        },
+        {
+          "label": "",
+          "value": "Free Setup"
+        },
+        {
+          "label": "",
+          "value": "Mon-Fri Support"
+        }
+      ]
+    },
+    {
+      "name": "DEDI 3",
+      "price": "€110",
+      "setup": "PKR 33,900",
+      "popular": false,
+      "orderLink": "",
+      "specs": [
+        {
+          "label": "",
+          "value": "Gold 6150 CPU"
+        },
+        {
+          "label": "",
+          "value": "18 Cores / 36 Threads"
+        },
+        {
+          "label": "",
+          "value": "128 GB DDR4 RAM"
+        },
+        {
+          "label": "",
+          "value": "1 TB NVMe SSD Disk"
+        },
+        {
+          "label": "",
+          "value": "Unmetered @ 1GBPS"
+        },
+        {
+          "label": "",
+          "value": "Netherlands Datacenter"
+        },
+        {
+          "label": "",
+          "value": "DMCA Ignored (Optional)"
+        },
+        {
+          "label": "",
+          "value": "Free Setup"
+        },
+        {
+          "label": "",
+          "value": "Mon-Fri Support"
+        }
+      ]
+    }
+  ],
+  "cpanel-license": [
+    {
+      "name": "cPanel License (VPS)",
+      "price": "PKR 1,200.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=13",
+      "specs": [
+        {
+          "label": "cPanel Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SitePad",
+          "value": "Free"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "FleetSSL Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Support",
+          "value": "Ticket/Live Chat"
+        }
+      ]
+    },
+    {
+      "name": "cPanel License (Dedicated Server)",
+      "price": "PKR 1,500.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=14",
+      "specs": [
+        {
+          "label": "cPanel Accounts",
+          "value": "Unlimited"
+        },
+        {
+          "label": "SitePad",
+          "value": "Free"
+        },
+        {
+          "label": "SSL Certificate",
+          "value": "FleetSSL Free"
+        },
+        {
+          "label": "Softaculous",
+          "value": "Free"
+        },
+        {
+          "label": "Support",
+          "value": "Ticket/Live Chat"
+        }
+      ]
+    }
+  ],
+  "plesk-license": [
+    {
+      "name": "Plesk (VPS)",
+      "price": "PKR 700.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=27",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "Unlimited"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Installation",
+          "value": "Free"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Plesk (Dedicated)",
+      "price": "PKR 1000.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=28",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "Unlimited"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Installation",
+          "value": "Free"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "litespeed-license": [
+    {
+      "name": "LiteSpeed 2 Workers",
+      "price": "PKR 1500.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=31",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Litespeed 4 Workers",
+      "price": "PKR 1700.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=77",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Litespeed 8 Workers",
+      "price": "PKR 1900.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=78",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    },
+    {
+      "name": "Litespeed X Workers",
+      "price": "PKR 2100.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": false,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=76",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "cloudlinux-license": [
+    {
+      "name": "Cloudlinux",
+      "price": "PKR 1500.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=26",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "virtualizor": [
+    {
+      "name": "Virtualizor",
+      "price": "PKR 1000.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=35",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "directadmin": [
+    {
+      "name": "DirectAdmin",
+      "price": "PKR 350.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=29",
+      "specs": [
+        {
+          "label": "Domains",
+          "value": "Unlimited"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Daily Backups",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Installation",
+          "value": "Free"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "jetbackup": [
+    {
+      "name": "JetBackup",
+      "price": "PKR 350.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=34",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "softaculous": [
+    {
+      "name": "Softaculous",
+      "price": "PKR 350.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=36",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "sitepad": [
+    {
+      "name": "SitePad",
+      "price": "PKR 450.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=37",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "whmsonic": [
+    {
+      "name": "WHMSonic",
+      "price": "PKR 350.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=41",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "whmreseller": [
+    {
+      "name": "WHMreseller",
+      "price": "PKR 750.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=30",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "dareseller": [
+    {
+      "name": "DAReseller",
+      "price": "PKR 350.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=39",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "imunify360": [
+    {
+      "name": "Imunify360",
+      "price": "PKR 550.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=33",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "cpguard": [
+    {
+      "name": "CPGuard",
+      "price": "PKR 550.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=38",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ],
+  "osm": [
+    {
+      "name": "Outgoing Spam Monitor (OSM)",
+      "price": "PKR 350.00",
+      "setup": "PKR 100.00 Setup Fee",
+      "popular": true,
+      "orderLink": "https://qazi.host/cart.php?a=add&pid=40",
+      "specs": [
+        {
+          "label": "Official Updates",
+          "value": "Yes"
+        },
+        {
+          "label": "IP Changeable",
+          "value": "Yes"
+        },
+        {
+          "label": "Replace Normal License",
+          "value": "Yes"
+        },
+        {
+          "label": "Free Installation",
+          "value": "Yes"
+        },
+        {
+          "label": "Support",
+          "value": "Standard"
+        }
+      ]
+    }
+  ]
+}
