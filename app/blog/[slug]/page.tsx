@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -12,6 +13,53 @@ export const runtime = 'nodejs';
 export async function generateStaticParams() {
   const slugs = await listBlogSlugs();
   return slugs.map((row) => ({ slug: row.slug }));
+}
+
+function stripHtml(html: string | null | undefined): string {
+  if (!html) return '';
+  return html.replace(/<[^>]*>?/gm, '').replace(/\s+/g, ' ').trim();
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getBlogBySlug(params.slug).catch(() => null);
+  if (!post) {
+    return {
+      title: 'Post not found',
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const description = (post.excerpt && post.excerpt.trim())
+    ? post.excerpt.trim()
+    : stripHtml(post.content).slice(0, 160);
+  const canonical = `/blog/${post.slug}`;
+  const ogImage = post.featured_image || '/logo.webp';
+  const published = post.date || post.created_at;
+  const modified = post.updated_at || published;
+
+  return {
+    title: post.title,
+    description,
+    alternates: { canonical },
+    keywords: [post.tag, 'qazi.host', 'web hosting blog', 'hosting tutorial'].filter(Boolean) as string[],
+    openGraph: {
+      title: post.title,
+      description,
+      url: `https://qazi.host${canonical}`,
+      type: 'article',
+      siteName: 'Qazi.Host',
+      images: [{ url: ogImage }],
+      publishedTime: published || undefined,
+      modifiedTime: modified || undefined,
+      tags: post.tag ? [post.tag] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: [ogImage],
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {

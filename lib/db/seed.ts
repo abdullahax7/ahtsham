@@ -203,6 +203,86 @@ const SITE_SETTINGS: { key: string; value: string; type?: string }[] = [
   { key: "final_cta_secondary_label", value: "Chat on WhatsApp" },
   // SEO / Verification
   { key: "google_site_verification", value: "" },
+  // Status page iframe
+  { key: "status_iframe_url", value: "https://status.qazi.host/", type: "url" },
+  { key: "status_page_link", value: "/status", type: "url" },
+  // Legal pages — admin-editable HTML bodies. Keep these as text/html so
+  // pasted markup renders directly.
+  {
+    key: "privacy_html",
+    type: "html",
+    value: `
+<h2>Will my information be shared?</h2>
+<p><strong>Will my personal information be shared with third parties?</strong> No, we do not share your personal information with any third parties. Your privacy is our priority.</p>
+<p><strong>Do you sell or rent customer information?</strong> No, we do not sell or rent any customer information. Your data is strictly used for the purposes outlined in our privacy policy.</p>
+
+<h2>Data Usage</h2>
+<p><strong>How is my personal information used by your company?</strong> We only use your personal information for the purposes specified in our privacy policy. This typically includes providing and improving our services and ensuring the security of your account.</p>
+
+<h2>Payment Security</h2>
+<p><strong>Are my payment details safe and secure?</strong> Yes, your payment details are treated with the utmost confidentiality. We use secure and encrypted methods to process payments, and we do not store your payment information.</p>
+
+<h2>Site Security</h2>
+<p><strong>How do you protect my personal information from unauthorized access?</strong> We employ industry-standard security measures to safeguard your personal information from unauthorized access, disclosure, alteration, and destruction.</p>
+<p><strong>Is my information stored securely?</strong> Absolutely. We take measures to ensure that your personal information is stored securely, and access is restricted to authorized personnel only.</p>
+
+<h2>My Rights</h2>
+<p><strong>How can I access or update my personal information?</strong> You can typically access and update your personal information through your account settings. Refer to our privacy policy for specific details on managing your data.</p>
+<p><strong>Can I opt-out of any data collection?</strong> Yes, you may have the option to opt-out of certain data collection activities. Check our privacy policy to understand your choices and how to exercise them.</p>
+
+<h2>Notifications</h2>
+<p><strong>Will I be notified of any changes to the privacy policy?</strong> Yes, we will notify you of any significant changes to our privacy policy. It's important to stay informed about how your personal information is handled.</p>
+`.trim(),
+  },
+  {
+    key: "terms_html",
+    type: "html",
+    value: `
+<h2>Hosting Terms</h2>
+<p>By using QaziHost services, you agree to abide by our hosting terms. Accounts are provisioned for legitimate use only; abuse, fraud, or chargebacks may result in immediate suspension.</p>
+
+<h2>Support &amp; Uptime</h2>
+<p>We target 99.9% uptime on shared and reseller hosting. Support is available Mon-Fri via WhatsApp during posted hours. Best-effort assistance is provided outside those hours.</p>
+
+<h2>Content Responsibility</h2>
+<p>You are solely responsible for the content hosted on your account. QaziHost is not liable for client content. Hosting illegal material will result in immediate termination without refund.</p>
+
+<h2>Prohibited Content</h2>
+<p><strong>Strictly prohibited:</strong> spamming, phishing, brute-force, floods, attacks, scanning, pornography, open proxy, malware distribution, botnets, terrorist activities and crypto mining. Violations result in suspension with no refund.</p>
+
+<h2>Resource Policy</h2>
+<p>Unlimited plans are governed by our Fair Usage Policy. Sustained excessive CPU, RAM, or I/O usage that degrades server performance for other tenants will result in throttling or required upgrade.</p>
+
+<h2>License Terms</h2>
+<p>Shared licenses (cPanel, LiteSpeed, CloudLinux, etc.) are bound to the activated IP. Misuse, resale outside our reseller program, or attempts to extract license keys will result in immediate revocation without refund.</p>
+
+<h2>Refund Policy</h2>
+<p>Hosting plans include a 7-day money-back guarantee for new customers. Licenses, domains and setup fees are non-refundable once activated.</p>
+`.trim(),
+  },
+  {
+    key: "fair_usage_html",
+    type: "html",
+    value: `
+<h2>What is Fair Usage?</h2>
+<p>Our shared and reseller hosting plans advertise "unlimited" resources. That term reflects the absence of a hard quota on bandwidth or storage, not a license to consume infinite server capacity. The Fair Usage Policy keeps our servers fast and reliable for every tenant.</p>
+
+<h2>CPU &amp; Memory</h2>
+<p>A single account on shared hosting may use up to 1 vCPU and 1024 MB RAM in bursts. Sustained usage above these limits over a 10-minute window will be throttled. Repeated violations will be flagged and the account asked to upgrade to a VPS.</p>
+
+<h2>Inodes &amp; Disk I/O</h2>
+<p>Each account is limited to 500,000 inodes (files). Heavy disk I/O — for example unbounded log writes or backup loops — will be rate-limited to protect the shared SSD array.</p>
+
+<h2>Bandwidth</h2>
+<p>Bandwidth is unmetered for legitimate website traffic. Hot-linking, file-sharing nodes, or using the account as a download mirror are not legitimate uses and will be suspended.</p>
+
+<h2>Email</h2>
+<p>Outgoing email is capped at 200 messages per hour per account. Bulk newsletters must be sent through a dedicated email service such as Mailgun or SendGrid.</p>
+
+<h2>What Happens If I Exceed?</h2>
+<p>We will reach out via WhatsApp or email with the relevant logs and ask you to optimize or upgrade. Accounts that repeatedly impact other tenants without remediation will be suspended pending upgrade.</p>
+`.trim(),
+  },
 ];
 
 export function runSeed() {

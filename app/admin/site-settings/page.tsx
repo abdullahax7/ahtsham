@@ -25,12 +25,41 @@ const GROUPS: Group[] = [
     ],
   },
   {
-    title: 'Status bar',
-    description: 'Top status strip shown above the header.',
+    title: 'Status bar & Status Page',
+    description: 'Top status strip shown above the header, and the iframe used on the /status page. The status bar is clickable and points to the link below.',
     fields: [
       { key: 'status_bar_text', label: 'Status Text' },
       { key: 'status_bar_uptime', label: 'Uptime Text' },
       { key: 'status_bar_servers', label: 'Servers Text' },
+      { key: 'status_page_link', label: 'Status Bar Link (where clicking the top bar takes visitors — usually /status or your external status page URL)', type: 'url' },
+      { key: 'status_iframe_url', label: 'Status Page Iframe URL (embedded on /status)', type: 'url' },
+    ],
+  },
+  {
+    title: 'Legal — Privacy Policy',
+    description: 'Content for /privacy. The body field accepts HTML — paste copy, headings, lists, links. Headings (h2, h3) are styled automatically.',
+    fields: [
+      { key: 'privacy_intro', label: 'Hero Intro Paragraph', type: 'textarea' },
+      { key: 'privacy_last_updated', label: 'Last Updated Label' },
+      { key: 'privacy_html', label: 'Privacy Policy Body (HTML)', type: 'html' },
+    ],
+  },
+  {
+    title: 'Legal — Terms & Conditions',
+    description: 'Content for /terms.',
+    fields: [
+      { key: 'terms_intro', label: 'Hero Intro Paragraph', type: 'textarea' },
+      { key: 'terms_last_updated', label: 'Last Updated Label' },
+      { key: 'terms_html', label: 'Terms Body (HTML)', type: 'html' },
+    ],
+  },
+  {
+    title: 'Legal — Fair Usage Policy',
+    description: 'Content for /fair-usage-policy.',
+    fields: [
+      { key: 'fair_usage_intro', label: 'Hero Intro Paragraph', type: 'textarea' },
+      { key: 'fair_usage_last_updated', label: 'Last Updated Label' },
+      { key: 'fair_usage_html', label: 'Fair Usage Body (HTML)', type: 'html' },
     ],
   },
   {

@@ -309,6 +309,13 @@ export const listProducts = cache(
   { tags: [TAGS.products] },
 );
 
+// Non-cached read used by the admin UI so newly-created/edited products
+// always show up immediately without waiting on `unstable_cache` to bust.
+export async function listProductsForAdmin() {
+  const rows = await db.select().from(t.products).orderBy(asc(t.products.sort_order)).all();
+  return rows.map((r) => hydrateProduct(r)!);
+}
+
 export const listFeaturedProducts = cache(
   async () => {
     const rows = await db.select().from(t.products).where(eq(t.products.is_featured, true)).orderBy(asc(t.products.sort_order)).all();

@@ -2,6 +2,8 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { eq, sql } from 'drizzle-orm';
+import { db, products } from '../../lib/db';
 import {
   bust, TAGS,
   upsertProduct, deleteProduct,
@@ -77,6 +79,28 @@ export async function deleteProductAction(formData: FormData) {
   revalidatePath('/admin/products');
   revalidatePath(`/${slug}`);
   redirect('/admin/products');
+}
+
+// Quick toggle from the product list — flip visibility or featured without
+// opening the full editor.
+export async function toggleProductVisibility(formData: FormData) {
+  const slug = (formData.get('slug') as string) || '';
+  const next = parseBool(formData.get('next'));
+  if (!slug) return;
+  db.update(products).set({ is_visible: next, updated_at: sql`(strftime('%Y-%m-%dT%H:%M:%fZ','now'))` as any }).where(eq(products.slug, slug)).run();
+  bust(TAGS.products, TAGS.product(slug));
+  revalidatePath('/admin/products');
+  revalidatePath(`/${slug}`);
+}
+
+export async function toggleProductFeatured(formData: FormData) {
+  const slug = (formData.get('slug') as string) || '';
+  const next = parseBool(formData.get('next'));
+  if (!slug) return;
+  db.update(products).set({ is_featured: next, updated_at: sql`(strftime('%Y-%m-%dT%H:%M:%fZ','now'))` as any }).where(eq(products.slug, slug)).run();
+  bust(TAGS.products, TAGS.product(slug));
+  revalidatePath('/admin/products');
+  revalidatePath('/');
 }
 
 // ---------- Testimonials ----------
