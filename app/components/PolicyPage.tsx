@@ -100,12 +100,14 @@ export default function PolicyPage({ title, intro, lastUpdated, html }: Props) {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .policy-layout {
-          max-width: 1200px;
+          max-width: 1240px;
           margin: 0 auto;
           padding: 0 24px;
           display: flex;
-          gap: 48px;
-          align-items: flex-start;
+          gap: 56px;
+          /* Do NOT use align-items: flex-start — that shrinks the sidebar
+             to its content height and breaks position: sticky inside it. */
+          align-items: stretch;
         }
         .policy-content {
           flex: 1;
