@@ -210,3 +210,29 @@ export async function saveSiteSettings(formData: FormData) {
   revalidatePath('/admin/site-settings');
   revalidatePath('/');
 }
+
+// ---------- Custom Code Blocks (head/footer injection) ----------
+export async function saveCustomCodeBlocks(formData: FormData) {
+  const raw = (formData.get('blocks') as string) || '[]';
+  let parsed: any[] = [];
+  try {
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr)) parsed = arr;
+  } catch {
+    parsed = [];
+  }
+  // Normalise on the server so we never store unexpected shapes.
+  const cleaned = parsed
+    .filter((b) => b && typeof b === 'object')
+    .map((b: any) => ({
+      id: String(b.id ?? Math.random().toString(36).slice(2)),
+      name: String(b.name ?? ''),
+      placement: b.placement === 'body_end' ? 'body_end' : 'head',
+      code: String(b.code ?? ''),
+      enabled: b.enabled !== false,
+    }));
+  upsertSiteSetting('custom_code_blocks', JSON.stringify(cleaned), 'json');
+  bust(TAGS.siteSettings);
+  revalidatePath('/admin/custom-code');
+  revalidatePath('/', 'layout');
+}

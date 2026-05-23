@@ -17,6 +17,7 @@ const NAV: { href: string; label: string }[] = [
   { href: '/admin/stats', label: 'Homepage Stats' },
   { href: '/admin/payments', label: 'Payment Methods' },
   { href: '/admin/site-settings', label: 'Site Settings' },
+  { href: '/admin/custom-code', label: 'Custom Header/Footer Code' },
   { href: '/admin/import-export', label: 'Import / Export' },
 ];
 

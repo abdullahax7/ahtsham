@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { notFound } from 'next/navigation';
 import BlogSchema from '../../components/BlogSchema';
+import BlogRelatedProducts from '../../components/BlogRelatedProducts';
 import { getBlogBySlug, listBlogSlugs } from '../../../lib/db/repos';
 const HeroParticles = dynamic(() => import('../../components/HeroParticles'), { ssr: false });
 
@@ -167,6 +168,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         .blog-content h3 { font-size: 1.4rem; font-weight: 600; color: #e8eaed; margin: 32px 0 16px; }
         .blog-content p { margin-bottom: 24px; color: var(--muted); }
       `}} />
+
+      <BlogRelatedProducts skus={post.related_products || []} />
 
       <Footer />
     </main>
